@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "+TkAQlhe6wkf9DaQ/mMyk5jxcy7XDKkzsbggw4b333TbLTqqieocaLXOfqJaKnV//BosUZdkciDCg0Zu4PL8cg==",
+  "success": true,
+  "projectFilePath": "/home/marcello/GitHub/animal-shelter/Core.Models/Core.Models.csproj",
+  "expectedPackageFiles": [
+    "/home/marcello/.nuget/packages/microsoft.aspnetcore.app.ref/3.1.3/microsoft.aspnetcore.app.ref.3.1.3.nupkg.sha512"
+  ],
+  "logs": []
+}
