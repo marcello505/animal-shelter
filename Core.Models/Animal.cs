@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Core.Models
 {
     public class Animal
     {
+        [Key]
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
@@ -28,7 +30,7 @@ namespace Core.Models
         public bool CastratedOrSterilized { get; set; }
         [Required]
         public bool? SafeForKids { get; set; }
-        public string Treatments { get; set; }
+        public IEnumerable<Treatment> Treatments { get; set; }
         [Required]
         public string ReasonForLeavingOwner { get; set; }
         [Required]
