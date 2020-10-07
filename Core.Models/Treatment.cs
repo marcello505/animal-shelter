@@ -6,7 +6,7 @@ namespace Core.Models
 {
     public class Treatment
     {
-        public enum TreatmentTypes
+        public enum Types
         {
             Sterilization,
             Castration,
@@ -18,7 +18,7 @@ namespace Core.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public TreatmentTypes Type { get; set; }
+        public Types Type { get; set; }
         public string Description { get; set; }
         public decimal Cost { get; set; }
         public int MinimumAgeInMonths { get; set; }

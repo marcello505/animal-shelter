@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Core.Models
 {
@@ -30,10 +31,26 @@ namespace Core.Models
         public string ImageURL { get; set; }
         [Required]
         public DateTime DateOfArrival { get; set; }
-        public DateTime DateOfAdoption { get; set; }
-        public DateTime DateOfDeath { get; set; }
+        public DateTime? DateOfAdoption { get; set; }
+        public DateTime? DateOfDeath { get; set; }
+        private bool _castratedOrSterilized { get; set; }
         [Required]
-        public bool CastratedOrSterilized { get; set; }
+        public bool CastratedOrSterilized {
+            get
+            {
+                //Dit checkt of de _castratedOrSterilized value true is, zo niet
+                //dan kijk hij of er treatments zijn geweest die het type
+                //Castrated of Sterilized hebben. Anders returned hij false.
+                if (_castratedOrSterilized) return _castratedOrSterilized;
+                if (Treatments != null) return Treatments
+                    .Any(t => t.Type == Treatment.Types.Castration
+                              || t.Type == Treatment.Types.Sterilization);
+                return _castratedOrSterilized;
+            }
+            set
+            {
+                _castratedOrSterilized = value;
+            } }
         [Required]
         public bool? SafeForKids { get; set; }
         public IEnumerable<Treatment> Treatments { get; set; }
