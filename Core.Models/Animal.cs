@@ -10,10 +10,37 @@ namespace Core.Models
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get 
+            {
+                return DateOfBirth;
+            }
+            set
+            {
+                DateOfBirth = value;
+                if(value.HasValue)
+                {
+                    EstimatedAge = null;
+                    Age = (DateTime.Now - DateOfBirth.Value).Days / 365;
+                }
+            }
+        }
         [Required]
-        public int Age { get; set; }
-        public int EstimatedAge { get; set; }
+        public int Age { get; private set; }
+        public int? EstimatedAge {
+            get 
+            {
+                return EstimatedAge;
+            }
+            set
+            {
+                EstimatedAge = value;
+                if(value.HasValue)
+                {
+                    DateOfBirth = null;
+                    Age = value.Value;
+                }
+            }
+        }
         [Required]
         public string Description { get; set; }
         [Required]
