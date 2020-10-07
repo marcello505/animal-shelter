@@ -10,37 +10,16 @@ namespace Core.Models
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
-        public DateTime? DateOfBirth { get 
-            {
-                return DateOfBirth;
-            }
-            set
-            {
-                DateOfBirth = value;
-                if(value.HasValue)
-                {
-                    EstimatedAge = null;
-                    Age = (DateTime.Now - DateOfBirth.Value).Days / 365;
-                }
-            }
-        }
+        public DateTime? DateOfBirth { get; set; }
         [Required]
-        public int Age { get; private set; }
-        public int? EstimatedAge {
-            get 
+        public int Age { get
             {
-                return EstimatedAge;
-            }
-            set
-            {
-                EstimatedAge = value;
-                if(value.HasValue)
-                {
-                    DateOfBirth = null;
-                    Age = value.Value;
-                }
-            }
-        }
+                if (DateOfBirth.HasValue && EstimatedAge.HasValue) throw  new InvalidOperationException("DateOfBirth and EstimatedAge can't both have values.");
+                if (DateOfBirth.HasValue) return (DateTime.Today - DateOfBirth.Value.Date).Days / 365;
+                if (EstimatedAge.HasValue) return EstimatedAge.Value;
+                throw new InvalidOperationException("DateOfBirth or EstimatedAge needs to be filled.");
+            } }
+        public int? EstimatedAge { get; set; }
         [Required]
         public string Description { get; set; }
         [Required]

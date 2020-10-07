@@ -22,9 +22,32 @@ namespace Core.Models.Test
             //Arrange
             Animal sut = new Animal();
             //Act
-            sut.DateOfBirth = new DateTime(1998, 11, 30);
+            sut.DateOfBirth = DateTime.Today.AddYears(-21);
             //Assert
             Assert.Equal(21, sut.Age);
+        }
+
+        [Fact]
+        public void EstimatedAgeAndDateOfBirthBothSetRetrunsError()
+        {
+            //Arrange
+            Animal sut = new Animal();
+            //Act
+            sut.DateOfBirth = DateTime.Today.AddYears(-1);
+            sut.EstimatedAge = 1;
+            //Assert
+            Assert.Throws<InvalidOperationException>(() => sut.Age);
+        }
+
+        [Fact]
+        public void EstimatedAgeOrDateOfBirthMustBeFilled()
+        {
+            //Arrange
+            Animal sut = new Animal();
+            //Act
+            //Blank
+            //Assert
+            Assert.Throws<InvalidOperationException>(() => sut.Age);
         }
     }
 }
