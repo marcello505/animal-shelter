@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Models", "Core.Models\Core.Models.csproj", "{364FD108-19A6-4B4E-8D7A-1A75FD035530}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Models.Test", "Core.Models.Test\Core.Models.Test.csproj", "{BF8EDDAF-1D99-4A46-B6AC-2865B26417DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Models.Tests", "Core.Models.Tests\Core.Models.Tests.csproj", "{BF8EDDAF-1D99-4A46-B6AC-2865B26417DF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{364FD108-19A6-4B4E-8D7A-1A75FD035530} = {364FD108-19A6-4B4E-8D7A-1A75FD035530}
 	EndProjectSection
