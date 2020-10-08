@@ -13,7 +13,7 @@ namespace Infrastructure
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //Replace this with the correct string, or find a more louse coupled solution.
-            optionsBuilder.UseSqlServer("");
+            optionsBuilder.UseSqlServer("Data Source=DESKTOP-U9PIPJE;Initial Catalog=AnimalShelterData;Integrated Security=True");
         }
     }
 }
