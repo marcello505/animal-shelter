@@ -53,7 +53,7 @@ namespace Core.Models
             } }
         [Required]
         public bool? SafeForKids { get; set; }
-        public IEnumerable<Treatment> Treatments { get; set; }
+        public ICollection<Treatment> Treatments { get; set; }
         [Required]
         public string ReasonForLeavingOwner { get; set; }
         [Required]

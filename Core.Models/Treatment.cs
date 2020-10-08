@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Models
 {
@@ -19,13 +20,14 @@ namespace Core.Models
         public int Id { get; set; }
         [Required]
         public Types Type { get; set; }
-        public string Description { get; set; }
-        public decimal Cost { get; set; }
-        public int MinimumAgeInMonths { get; set; }
+        public string? Description { get; set; }
+        [Column(TypeName = "decimal(18, 2)")]
+        public decimal? Cost { get; set; }
+        public int? MinimumAgeInMonths { get; set; }
         [Required]
         public string TreatmentDoneBy { get; set; }
         [Required]
         public DateTime DateOfTreatment { get; set; }
-        public IEnumerable<Comment> Comments { get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 }
