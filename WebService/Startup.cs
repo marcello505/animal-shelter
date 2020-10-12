@@ -29,6 +29,7 @@ namespace WebService
         {
             services.AddScoped<IAnimalRepository, AnimalSqlRepository>();
             services.AddControllers();
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +41,10 @@ namespace WebService
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AnimalShelter v2 API"));
+
 
             app.UseRouting();
 
