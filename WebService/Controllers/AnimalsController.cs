@@ -25,13 +25,14 @@ namespace WebService.Controllers
 
         // GET: api/<AnimalsController>
         [HttpGet]
-        public IActionResult Get([FromQuery]string dogOrCat, [FromQuery]string gender)
+        public IActionResult Get([FromQuery]string dogOrCat, [FromQuery]string gender, [FromQuery]string safeForKids)
         {
-            //Check of er query params zijn en filtreer op deze. Anders return de lijst normaal.
-            if (dogOrCat != null && gender != null) return Ok(_context.GetAll().Where(a => a.DogOrCat == dogOrCat && a.Gender == gender));
-            if (dogOrCat != null) return Ok(_context.GetAll().Where(a => a.DogOrCat == dogOrCat));
-            if (gender != null) return Ok(_context.GetAll().Where(a => a.Gender == gender));
-            return Ok(_context.GetAll());
+            var result = _context.GetAll();
+            //Check of er query params zijn en filtreer op deze.
+            if (dogOrCat != null) result = result.Where(a => a.DogOrCat == dogOrCat);
+            if (gender != null) result = result.Where(a => a.Gender == gender);
+            if (safeForKids != null && safeForKids.ToLower().Equals("true") || safeForKids.ToLower().Equals("false") ) result = result.Where(a => a.SafeForKids == Boolean.Parse(safeForKids));
+            return Ok(result);
         }
 
         // GET api/<AnimalsController>/5
