@@ -29,9 +29,34 @@ namespace Infrastructure
             _context.SaveChanges();
         }
 
+        public void Delete(int id)
+        {
+            _context.Animals.Remove(Get(id));
+            _context.SaveChanges();
+        }
+
+        public void Delete(IEnumerable<Animal> animals)
+        {
+            _context.Animals.RemoveRange(animals);
+            _context.SaveChanges();
+        }
+
+        public Animal Get(int id)
+        {
+            var treatmentRepository = new TreatmentSqlRepository();
+            var result = _context.Animals.SingleOrDefault(p => p.Id == id);
+            if (result != null) result.Treatments = treatmentRepository.GetByAnimalId(id).ToList();
+            return result;
+        }
+
         public IEnumerable<Animal> GetAll()
         {
-            return _context.Animals;
+            var treatmentRepository = new TreatmentSqlRepository();
+            var result = _context.Animals;
+            foreach(Animal element in result){
+                element.Treatments = treatmentRepository.GetByAnimalId(element.Id).ToList();
+            }
+            return result;
         }
 
         public void Update(Animal animal)

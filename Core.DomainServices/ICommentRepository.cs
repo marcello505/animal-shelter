@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Core.DomainServices
 {
-    interface ICommentRepository
+    public interface ICommentRepository
     {
         public IEnumerable<Comment> GetAll();
         public void Add(Comment comment);

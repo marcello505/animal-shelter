@@ -8,8 +8,10 @@ namespace Core.DomainServices
     public interface IAnimalRepository
     {
         public IEnumerable<Animal> GetAll();
+        public Animal Get(int id);
         public void Add(Animal animal);
         public void Update(Animal animal);
         public void Delete(Animal animal);
+        public void Delete(int id);
     }
 }

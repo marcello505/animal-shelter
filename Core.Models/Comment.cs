@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Models
 {
@@ -13,5 +14,7 @@ namespace Core.Models
         public DateTime DateOfComment { get; set; }
         [Required]
         public string CommentMadeBy { get; set; }
+        [ForeignKey("Treatment")]
+        public int TreatmentId { get; set; }
     }
 }

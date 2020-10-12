@@ -29,5 +29,8 @@ namespace Core.Models
         [Required]
         public DateTime DateOfTreatment { get; set; }
         public ICollection<Comment> Comments { get; set; }
+
+        [ForeignKey("Animal")]
+        public int AnimalId { get; set; }
     }
 }
