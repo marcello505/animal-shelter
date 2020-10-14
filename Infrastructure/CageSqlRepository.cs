@@ -31,7 +31,13 @@ namespace Infrastructure
 
         public IEnumerable<Cage> GetAll()
         {
-            throw new NotImplementedException();
+            var animalRepository = new AnimalSqlRepository();
+            var result = _context.Cages;
+            foreach(Cage item in result)
+            {
+                item.AddAnimalToCage(animalRepository.GetByCageId(item.Id));
+            }
+            return result;
         }
     }
 }
