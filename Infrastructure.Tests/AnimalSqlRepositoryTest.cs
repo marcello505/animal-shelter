@@ -44,6 +44,7 @@ namespace Infrastructure.Tests
 
         public void Dispose()
         {
+            _context = new AnimalSqlRepository();
             _context.Delete(_context.GetAll().Where(a => a.Name == CLEAN_UP_STRING));
         }
     }

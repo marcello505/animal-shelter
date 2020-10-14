@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace Core.Models
@@ -59,6 +60,8 @@ namespace Core.Models
         [Required]
         public bool Adoptable { get; set; }
         public string AdoptedBy { get; set; }
+        [ForeignKey("Cage")]
+        public int? CageId { get; set; }
         
     }
 }

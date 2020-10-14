@@ -29,8 +29,9 @@ namespace Core.Models
         //Kooi logica.
         //Als je de lijst aanvraagt dan krijg je een ReadOnlyCollection terug, sinds je niet direct dingen in de lijst mag aanpassen.
         //Dit moet via de method AddAnimalToCage.
-        private IList<Animal> _Animals { get; set; }
-        public ReadOnlyCollection<Animal> Animals => (ReadOnlyCollection<Animal>)_Animals;
+        //Normaal zou ik de private value als een Interface hebben. Maar alleen de concrete list class heeft de AsReadOnly() methode.
+        private List<Animal> _Animals { get; set; }
+        public ReadOnlyCollection<Animal> Animals => _Animals.AsReadOnly();
         public bool AddAnimalToCage(Animal animal)
         {
             if (_Animals == null) _Animals = new List<Animal>();
@@ -52,6 +53,15 @@ namespace Core.Models
             }
 
             return false;
+        }
+        public bool AddAnimalToCage(IEnumerable<Animal> animals)
+        {
+            var result = true;
+            foreach(Animal item in animals)
+            {
+                result = AddAnimalToCage(item);
+            }
+            return result;
         }
 
     }

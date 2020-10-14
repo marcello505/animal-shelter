@@ -31,6 +31,6 @@ namespace Core.Models
         public ICollection<Comment> Comments { get; set; }
 
         [ForeignKey("Animal")]
-        public int AnimalId { get; set; }
+        public int? AnimalId { get; set; }
     }
 }

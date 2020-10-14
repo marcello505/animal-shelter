@@ -6,6 +6,7 @@ namespace Core.Models.Test
 {
     public class AnimalTest
     {
+        //BR_5-1
         [Fact]
         public void EstimatedAgeSetsAge()
         {
@@ -20,6 +21,7 @@ namespace Core.Models.Test
             Assert.Equal(20, result);
         }
         
+        //BR_5-2
         [Fact]
         public void DateOfBirthSetsAge()
         {
@@ -34,6 +36,7 @@ namespace Core.Models.Test
             Assert.Equal(21, result);
         }
 
+        //BR_5-3
         [Fact]
         public void EstimatedAgeAndDateOfBirthBothSetRetrunsError()
         {
@@ -48,6 +51,7 @@ namespace Core.Models.Test
             Assert.Throws<InvalidOperationException>(() => sut.Age);
         }
 
+        //BR_5-4
         [Fact]
         public void EstimatedAgeOrDateOfBirthMustBeFilled()
         {
