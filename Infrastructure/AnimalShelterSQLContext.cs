@@ -6,10 +6,10 @@ namespace Infrastructure
 {
     public class AnimalShelterSqlContext : DbContext
     {
-        public DbSet<Cage> Cages { get; set; }
         public DbSet<Animal> Animals { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Treatment> Treatments { get; set; }
+        public DbSet<Cage> Cages { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

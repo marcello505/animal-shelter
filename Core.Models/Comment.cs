@@ -15,6 +15,6 @@ namespace Core.Models
         [Required]
         public string CommentMadeBy { get; set; }
         [ForeignKey("Treatment")]
-        public int TreatmentId { get; set; }
+        public int? TreatmentId { get; set; }
     }
 }

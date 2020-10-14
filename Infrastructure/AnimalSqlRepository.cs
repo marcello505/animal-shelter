@@ -53,7 +53,7 @@ namespace Infrastructure
         {
             var treatmentRepository = new TreatmentSqlRepository();
             var result = _context.Animals;
-            foreach(Animal element in result){
+            if(result != null) foreach(Animal element in result){
                 element.Treatments = treatmentRepository.GetByAnimalId(element.Id).ToList();
             }
             return result;
@@ -61,7 +61,7 @@ namespace Infrastructure
 
         public IEnumerable<Animal> GetByCageId(int cageId)
         {
-            return GetAll().Where(a => a.cageId == cageId);
+            return GetAll().Where(a => a.CageId == cageId);
         }
 
         public void Update(Animal animal)
