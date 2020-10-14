@@ -59,6 +59,7 @@ namespace Core.Models
         [Required]
         public bool Adoptable { get; set; }
         public string AdoptedBy { get; set; }
+        public int CageId { get; set; }
         
     }
 }

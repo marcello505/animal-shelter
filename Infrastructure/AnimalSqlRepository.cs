@@ -59,6 +59,11 @@ namespace Infrastructure
             return result;
         }
 
+        public IEnumerable<Animal> GetByCageId(int cageId)
+        {
+            return GetAll().Where(a => a.cageId == cageId);
+        }
+
         public void Update(Animal animal)
         {
             throw new NotImplementedException();

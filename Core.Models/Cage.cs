@@ -53,6 +53,15 @@ namespace Core.Models
 
             return false;
         }
+        public bool AddAnimalToCage(IEnumerable<Animal> animals)
+        {
+            var result = true;
+            foreach(Animal item in animals)
+            {
+                result = AddAnimalToCage(item);
+            }
+            return result;
+        }
 
     }
 }
