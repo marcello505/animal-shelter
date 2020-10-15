@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Core.DomainServices
 {
@@ -10,8 +11,8 @@ namespace Core.DomainServices
         public IEnumerable<Animal> GetAll();
         public Animal Get(int id);
         public IEnumerable<Animal> GetByCageId(int cageId);
-        public void Add(Animal animal);
-        public void Update(Animal animal);
+        public Task Add(Animal animal);
+        public Task Update(Animal animal);
         public void Delete(Animal animal);
         public void Delete(int id);
     }

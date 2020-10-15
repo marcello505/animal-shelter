@@ -25,7 +25,7 @@ namespace ManagementApplication.Models
             {
                 Id = animal.Id,
                 Name = animal.Name,
-                Age = animal.Age,
+                Age = animal.Age.Value,
                 Description = animal.Description,
                 DogOrCat = animal.DogOrCat,
                 Breed = animal.Breed,
@@ -78,6 +78,32 @@ namespace ManagementApplication.Models
                 result.Animals = stringToBuild.ToString();
             }
 
+            return result;
+        }
+
+        public static Animal ToDomainModel(this NewAnimalViewModel newAnimal)
+        {
+            var result = new Animal
+            {
+                Id = newAnimal.Id,
+                Name = newAnimal.Name,
+                DateOfBirth = newAnimal.DateOfBirth,
+                EstimatedAge = newAnimal.EstimatedAge,
+                Description = newAnimal.Description,
+                DogOrCat = newAnimal.DogOrCat,
+                Breed = newAnimal.Breed,
+                Gender = newAnimal.Gender,
+                ImageURL = newAnimal.ImageURL,
+                DateOfArrival = newAnimal.DateOfArrival,
+                DateOfAdoption = newAnimal.DateOfAdoption,
+                DateOfDeath = newAnimal.DateOfDeath,
+                CastratedOrSterilized = newAnimal.CastratedOrSterilized,
+                SafeForKids = newAnimal.SafeForKids,
+                ReasonForLeavingOwner = newAnimal.ReasonForLeavingOwner,
+                Adoptable = newAnimal.Adoptable,
+                AdoptedBy = newAnimal.AdoptedBy,
+                CageId = newAnimal.CageId
+            };
             return result;
         }
     }

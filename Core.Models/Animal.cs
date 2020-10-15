@@ -11,19 +11,21 @@ namespace Core.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        [DataType(DataType.Text)]
         public string Name { get; set; }
         [DataType(DataType.Date)]
         public DateTime? DateOfBirth { get; set; }
         [Required]
-        public int Age { get
+        public int? Age { get
             {
-                if (DateOfBirth.HasValue && EstimatedAge.HasValue) throw  new InvalidOperationException("DateOfBirth and EstimatedAge can't both have values.");
+                if (DateOfBirth.HasValue && EstimatedAge.HasValue) return null;
                 if (DateOfBirth.HasValue) return (DateTime.Today - DateOfBirth.Value.Date).Days / 365;
                 if (EstimatedAge.HasValue) return EstimatedAge.Value;
-                throw new InvalidOperationException("DateOfBirth or EstimatedAge needs to be filled.");
+                return null;
             } }
         public int? EstimatedAge { get; set; }
         [Required]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         [Required]
         public string DogOrCat { get; set; }
@@ -32,8 +34,11 @@ namespace Core.Models
         public string Gender { get; set; }
         public string ImageURL { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime DateOfArrival { get; set; }
+        [DataType(DataType.Date)]
         public DateTime? DateOfAdoption { get; set; }
+        [DataType(DataType.Date)]
         public DateTime? DateOfDeath { get; set; }
         private bool _castratedOrSterilized { get; set; }
         [Required]
@@ -57,6 +62,7 @@ namespace Core.Models
         public bool? SafeForKids { get; set; }
         public ICollection<Treatment> Treatments { get; set; }
         [Required]
+        [DataType(DataType.MultilineText)]
         public string ReasonForLeavingOwner { get; set; }
         [Required]
         public bool Adoptable { get; set; }
