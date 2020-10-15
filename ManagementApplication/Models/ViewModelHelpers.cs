@@ -1,0 +1,84 @@
+﻿using Core.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ManagementApplication.Models
+{
+    public static class ViewModelHelpers
+    {
+        public static List<AnimalViewModel> ToViewModel(this IEnumerable<Animal> animals)
+        {
+            var result = new List<AnimalViewModel>();
+
+            foreach(var animal in animals)
+            {
+                result.Add(animal.ToViewModel());
+            }
+            return result;
+        }
+        public static AnimalViewModel ToViewModel(this Animal animal)
+        {
+            var result = new AnimalViewModel
+            {
+                Id = animal.Id,
+                Name = animal.Name,
+                Age = animal.Age,
+                Description = animal.Description,
+                DogOrCat = animal.DogOrCat,
+                Breed = animal.Breed,
+                Gender = animal.Gender,
+                DateOfArrival = animal.DateOfArrival,
+                CastratedOrSterilized = animal.CastratedOrSterilized,
+                SafeForKids = animal.SafeForKids,
+                Adoptable = animal.Adoptable,
+            };
+
+            if (animal.Treatments != null)
+            {
+                var stringToBuild = new StringBuilder();
+                foreach(Treatment treatment in animal.Treatments)
+                    {
+                        stringToBuild.Append(treatment.Type.ToString());
+                        stringToBuild.Append(";");
+                    }
+                result.Treatments = stringToBuild.ToString();
+            }
+
+            return result;
+        }
+
+        public static List<CageViewModel> ToViewModel(this IEnumerable<Cage> cages)
+        {
+            var result = new List<CageViewModel>();
+
+            foreach(var cage in cages)
+            {
+                result.Add(cage.ToViewModel());
+            }
+            return result;
+        }
+        public static CageViewModel ToViewModel(this Cage cage)
+        {
+            var result = new CageViewModel
+            {
+                MaximumAnimals = cage.MaximumAnimals
+            };
+
+            if (cage.Animals != null)
+            {
+                var stringToBuild = new StringBuilder();
+                foreach(var item in cage.Animals)
+                {
+                    stringToBuild.Append(item.Name);
+                    stringToBuild.Append(";");
+                }
+                result.Animals = stringToBuild.ToString();
+            }
+
+            return result;
+        }
+    }
+}

@@ -12,6 +12,7 @@ namespace Core.Models
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
+        [DataType(DataType.Date)]
         public DateTime? DateOfBirth { get; set; }
         [Required]
         public int Age { get
@@ -62,6 +63,7 @@ namespace Core.Models
         public string AdoptedBy { get; set; }
         [ForeignKey("Cage")]
         public int? CageId { get; set; }
+        public ICollection<Comment> Comments { get; set; }
         
     }
 }

@@ -10,7 +10,7 @@ namespace Infrastructure
     public class CageSqlRepository : ICageRepository
     {
         private AnimalShelterSqlContext _context;
-        CageSqlRepository()
+        public CageSqlRepository()
         {
             _context = new AnimalShelterSqlContext();
         }

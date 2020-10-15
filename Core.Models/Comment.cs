@@ -14,7 +14,7 @@ namespace Core.Models
         public DateTime DateOfComment { get; set; }
         [Required]
         public string CommentMadeBy { get; set; }
-        [ForeignKey("Treatment")]
+        [ForeignKey("Animal")]
         public int? TreatmentId { get; set; }
     }
 }
