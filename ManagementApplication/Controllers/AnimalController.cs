@@ -58,5 +58,23 @@ namespace ManagementApplication.Controllers
             _context.Add(result);
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            return View(_context.Get(id));
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Animal animal)
+        {
+            _context.Delete(animal);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Details(int id)
+        {
+            return View(_context.Get(id));
+        }
     }
 }

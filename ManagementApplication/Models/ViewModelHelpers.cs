@@ -106,5 +106,14 @@ namespace ManagementApplication.Models
             };
             return result;
         }
+
+        public static Cage ToDomainModel(this NewCageViewModel newCage)
+        {
+            var result = new Cage
+            {
+                MaximumAnimals = newCage.MaximumAnimals
+            };
+            return result;
+        }
     }
 }
