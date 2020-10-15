@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Infrastructure
 {
-    class TreatmentSqlRepository : ITreatmentRepository
+    public class TreatmentSqlRepository : ITreatmentRepository
     {
         private AnimalShelterSqlContext _context;
 
