@@ -30,26 +30,14 @@ namespace Core.Models
         //Als je de lijst aanvraagt dan krijg je een ReadOnlyCollection terug, sinds je niet direct dingen in de lijst mag aanpassen.
         //Dit moet via de method AddAnimalToCage.
         //Normaal zou ik de private value als een Interface hebben. Maar alleen de concrete list class heeft de AsReadOnly() methode.
-        private List<Animal> _Animals { get; set; }
+        private List<Animal> _Animals { get; set; } = new List<Animal>();
         public ReadOnlyCollection<Animal> Animals => _Animals.AsReadOnly();
         public bool AddAnimalToCage(Animal animal)
         {
-            if (_Animals == null) _Animals = new List<Animal>();
-
-            if(_Animals.Count < MaximumAnimals)
+            if (CanAddAnimalToCage(animal))
             {
-                //Als er animals in de kooi zitten, kijk of het geslacht en diersoort hetzelfde is.
-                if(_Animals.Count != 0 && _Animals.Any(a => a.Gender == animal.Gender && a.DogOrCat == animal.DogOrCat))
-                {
-                    _Animals.Add(animal);
-                    return true;
-                }
-                //Als de kooi leeg is, voeg het dier toe.
-                else if(_Animals.Count == 0)
-                {
-                    _Animals.Add(animal);
-                    return true;
-                }
+                _Animals.Add(animal);
+                return true;
             }
 
             return false;
@@ -62,6 +50,21 @@ namespace Core.Models
                 result = AddAnimalToCage(item);
             }
             return result;
+        }
+
+        public bool CanAddAnimalToCage(Animal animal)
+        {
+                //Als er animals in de kooi zitten, kijk of het geslacht en diersoort hetzelfde is.
+                if(_Animals.Count != 0 && _Animals.Any(a => a.Gender == animal.Gender && a.DogOrCat == animal.DogOrCat))
+                {
+                    return true;
+                }
+                //Als de kooi leeg is, voeg het dier toe.
+                else if(_Animals.Count == 0)
+                {
+                    return true;
+                }
+            return false;
         }
 
     }

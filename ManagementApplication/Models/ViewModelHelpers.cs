@@ -1,4 +1,6 @@
-﻿using Core.Models;
+﻿using Core.DomainServices;
+using Core.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,6 +66,7 @@ namespace ManagementApplication.Models
         {
             var result = new CageViewModel
             {
+                Id = cage.Id,
                 MaximumAnimals = cage.MaximumAnimals
             };
 
@@ -114,6 +117,18 @@ namespace ManagementApplication.Models
                 MaximumAnimals = newCage.MaximumAnimals
             };
             return result;
+        }
+
+        public static void FindFreeCages(this ICollection<SelectListItem> freeCages, ICageRepository context)
+        {
+            var stringToBuild = new StringBuilder();
+            foreach(var cage in context.GetAllFreeCages())
+            {
+                stringToBuild.Clear();
+                stringToBuild.Append("Id: ").Append(cage.Id).Append(" Spots left: ").Append(cage.MaximumAnimals - cage.Animals.Count);
+
+                freeCages.Add(new SelectListItem { Value = cage.Id.ToString(), Text = stringToBuild.ToString() });
+            }
         }
     }
 }

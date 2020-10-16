@@ -7,6 +7,7 @@ namespace ManagementApplication.Models
 {
     public class CageViewModel
     {
+        public int Id { get; set; }
         public int MaximumAnimals { get; set; }
         public string Animals { get; set; }
     }

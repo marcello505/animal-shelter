@@ -20,7 +20,7 @@ namespace Core.Models
         public int Id { get; set; }
         [Required]
         public Types Type { get; set; }
-        public string? Description { get; set; }
+        public string Description { get; set; }
         [Column(TypeName = "decimal(18, 2)")]
         public decimal? Cost { get; set; }
         public int? MinimumAgeInMonths { get; set; }

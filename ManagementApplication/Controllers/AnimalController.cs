@@ -14,10 +14,12 @@ namespace ManagementApplication.Controllers
     {
         private readonly ILogger<AnimalController> _logger;
         private readonly IAnimalRepository _context;
-        public AnimalController(ILogger<AnimalController> logger, IAnimalRepository context)
+        private readonly ICageRepository _cageRepository;
+        public AnimalController(ILogger<AnimalController> logger, IAnimalRepository context, ICageRepository cageRepository)
         {
             _logger = logger;
             _context = context;
+            _cageRepository = cageRepository;
         }
         public IActionResult Index()
         {
@@ -34,6 +36,8 @@ namespace ManagementApplication.Controllers
         public IActionResult Edit(Animal animal)
         {
             if (!animal.Age.HasValue) ModelState.AddModelError("Age", "Either EstimatedAge or DateOfBirth need to be filled in. But not both.");
+            //Dit kijkt of de animal aan de kooi kan worden toegevoegd.
+            if (animal.CageId.HasValue && !_cageRepository.Get(animal.CageId.Value).CanAddAnimalToCage(animal)) ModelState.AddModelError("CageId", "Can't assign Animal to cage. Animals can't be paired if they're a different type of animal or if they differ in gender without being Sterilized/Castrated.");
 
             if (!ModelState.IsValid) return View(animal);
 
@@ -52,6 +56,8 @@ namespace ManagementApplication.Controllers
         {
             var result = animal.ToDomainModel();
             if (!result.Age.HasValue) ModelState.AddModelError("Age", "Either EstimatedAge or DateOfBirth need to be filled in. But not both.");
+            //Dit kijkt of de animal aan de kooi kan worden toegevoegd.
+            if (animal.CageId.HasValue && !_cageRepository.Get(animal.CageId.Value).CanAddAnimalToCage(animal.ToDomainModel())) ModelState.AddModelError("CageId", "Can't assign Animal to cage. Animals can't be paired if they're a different type of animal or if they differ in gender without being Sterilized/Castrated.");
 
             if (!ModelState.IsValid) return View(animal);
 
