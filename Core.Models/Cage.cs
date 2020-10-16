@@ -54,6 +54,7 @@ namespace Core.Models
 
         public bool CanAddAnimalToCage(Animal animal)
         {
+            if (_Animals.Count == MaximumAnimals) return false;
                 //Als er animals in de kooi zitten, kijk of het geslacht en diersoort hetzelfde is.
                 if(_Animals.Count != 0 && _Animals.Any(a => a.Gender == animal.Gender && a.DogOrCat == animal.DogOrCat))
                 {

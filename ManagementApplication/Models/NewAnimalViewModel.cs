@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -42,6 +43,6 @@ namespace ManagementApplication.Models
         [Required]
         public bool Adoptable { get; set; }
         public string AdoptedBy { get; set; }
-        public IEnumerable<SelectListItem> FreeCages { get; set; }
+        public int? CageId { get; set; }
     }
 }

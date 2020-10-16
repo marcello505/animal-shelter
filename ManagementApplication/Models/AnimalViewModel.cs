@@ -22,6 +22,5 @@ namespace ManagementApplication.Models
         public bool Adoptable { get; set; }
 
         
-        public IEnumerable<CageViewModel> FreeCages { get; set; }
     }
 }
