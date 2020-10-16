@@ -84,6 +84,32 @@ namespace ManagementApplication.Models
             return result;
         }
 
+        public static List<TreatmentViewModel> ToViewModel(this IEnumerable<Treatment> treatments)
+        {
+            var result = new List<TreatmentViewModel>();
+
+            foreach(var treatment in treatments)
+            {
+                result.Add(treatment.ToViewModel());
+            }
+            return result;
+        }
+
+        public static TreatmentViewModel ToViewModel(this Treatment treatment)
+        {
+            var result = new TreatmentViewModel
+            {
+                Id = treatment.Id,
+                Type = treatment.Type.ToString(),
+                Description = treatment.Description,
+                Cost = treatment.Cost,
+                MinimumAgeInMonths = treatment.MinimumAgeInMonths,
+                TreatmentDoneBy = treatment.TreatmentDoneBy,
+                AnimalId = treatment.AnimalId
+            };
+            return result;
+        }
+
         public static Animal ToDomainModel(this NewAnimalViewModel newAnimal)
         {
             var result = new Animal

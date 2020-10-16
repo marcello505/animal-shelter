@@ -37,7 +37,7 @@ namespace ManagementApplication.Controllers
         {
             if (!animal.Age.HasValue) ModelState.AddModelError("Age", "Either EstimatedAge or DateOfBirth need to be filled in. But not both.");
             //Dit kijkt of de animal aan de kooi kan worden toegevoegd.
-            if (animal.CageId.HasValue && !_cageRepository.Get(animal.CageId.Value).CanAddAnimalToCage(animal)) ModelState.AddModelError("CageId", "Can't assign Animal to cage. Animals can't be paired if they're a different type of animal or if they differ in gender without being Sterilized/Castrated.");
+            if (animal.CageId.HasValue && !_cageRepository.Get(animal.CageId.Value).CanAddAnimalToCage(animal)) ModelState.AddModelError("CageId", "Can't assign Animal to cage. It's either full or the Animals can't be paired because they're a different type of animal or they differ in gender without being Sterilized/Castrated.");
 
             if (!ModelState.IsValid) return View(animal);
 
@@ -57,7 +57,7 @@ namespace ManagementApplication.Controllers
             var result = animal.ToDomainModel();
             if (!result.Age.HasValue) ModelState.AddModelError("Age", "Either EstimatedAge or DateOfBirth need to be filled in. But not both.");
             //Dit kijkt of de animal aan de kooi kan worden toegevoegd.
-            if (animal.CageId.HasValue && !_cageRepository.Get(animal.CageId.Value).CanAddAnimalToCage(animal.ToDomainModel())) ModelState.AddModelError("CageId", "Can't assign Animal to cage. Animals can't be paired if they're a different type of animal or if they differ in gender without being Sterilized/Castrated.");
+            if (animal.CageId.HasValue && !_cageRepository.Get(animal.CageId.Value).CanAddAnimalToCage(animal.ToDomainModel())) ModelState.AddModelError("CageId", "Can't assign Animal to cage. It's either full or the Animals can't be paired because they're a different type of animal or they differ in gender without being Sterilized/Castrated.");
 
             if (!ModelState.IsValid) return View(animal);
 
