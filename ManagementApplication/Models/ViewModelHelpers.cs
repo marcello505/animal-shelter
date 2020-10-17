@@ -105,6 +105,7 @@ namespace ManagementApplication.Models
                 Cost = treatment.Cost,
                 MinimumAgeInMonths = treatment.MinimumAgeInMonths,
                 TreatmentDoneBy = treatment.TreatmentDoneBy,
+                DateOfTreatment = treatment.DateOfTreatment,
                 AnimalId = treatment.AnimalId
             };
             return result;

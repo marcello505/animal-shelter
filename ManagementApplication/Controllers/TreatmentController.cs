@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.DomainServices;
+using Core.Models;
 using ManagementApplication.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -31,6 +32,76 @@ namespace ManagementApplication.Controllers
             }
 
             return View(result);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Treatment treatment)
+        {
+            if(!treatment.IsValid()) ModelState.AddModelError("Description", "For this type of treatment there needs to be description filled out. For chippings put in the GUID of the chip, for Euthanasia put in the reason for it.");
+
+            //Kijk of de Animal oud genoeg is voor de treatment.
+            if (treatment.AnimalId.HasValue)
+            {
+                var animalTest = _animalRepository.Get(treatment.AnimalId.Value);
+                if(!treatment.CanAssignAnimal(animalTest)) ModelState.AddModelError("AnimalId", "Animal is too young for this operation.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(treatment);
+            }
+
+            return ModelState.IsValid ? (IActionResult)RedirectToAction("Index") : View(treatment);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            return View(_context.Get(id));
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Treatment treatment)
+        {
+            if(!treatment.IsValid()) ModelState.AddModelError("Description", "For this type of treatment there needs to be description filled out. For chippings put in the GUID of the chip, for Euthanasia put in the reason for it.");
+
+            //Kijk of de Animal oud genoeg is voor de treatment.
+            if (treatment.AnimalId.HasValue)
+            {
+                var animalTest = _animalRepository.Get(treatment.AnimalId.Value);
+                if(!treatment.CanAssignAnimal(animalTest)) ModelState.AddModelError("AnimalId", "Animal is too young for this operation.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                _context.Update(treatment);
+            }
+
+            return ModelState.IsValid ? (IActionResult)RedirectToAction("Index") : View(treatment);
+        }
+
+        public IActionResult Details(int id)
+        {
+            return View(_context.Get(id)?.ToViewModel()?? new TreatmentViewModel { Id = id});
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            return View(_context.Get(id) ?? new Treatment { Id = id });
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Treatment treatment)
+        {
+            _context.Delete(treatment);
+            return RedirectToAction("Index");
         }
     }
 }
