@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Core.Models.Comment>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CommentText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfComment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CommentMadeBy)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CommentText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfComment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CommentMadeBy)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

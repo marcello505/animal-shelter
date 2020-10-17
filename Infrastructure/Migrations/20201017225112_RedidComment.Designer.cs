@@ -4,14 +4,16 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AnimalShelterSqlContext))]
-    partial class AnimalShelterSqlContextModelSnapshot : ModelSnapshot
+    [Migration("20201017225112_RedidComment")]
+    partial class RedidComment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -223,24 +225,21 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Core.Models.Cage", null)
                         .WithMany("Animals")
-                        .HasForeignKey("CageId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("CageId");
                 });
 
             modelBuilder.Entity("Core.Models.Comment", b =>
                 {
                     b.HasOne("Core.Models.Animal", null)
                         .WithMany("Comments")
-                        .HasForeignKey("AnimalId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AnimalId");
                 });
 
             modelBuilder.Entity("Core.Models.Treatment", b =>
                 {
                     b.HasOne("Core.Models.Animal", null)
                         .WithMany("Treatments")
-                        .HasForeignKey("AnimalId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("AnimalId");
                 });
 
             modelBuilder.Entity("Core.Models.Animal", b =>

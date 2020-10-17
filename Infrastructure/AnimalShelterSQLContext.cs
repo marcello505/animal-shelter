@@ -21,6 +21,29 @@ namespace Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity("Core.Models.Animal", b =>
+                {
+                    b.HasOne("Core.Models.Cage", null)
+                        .WithMany("Animals")
+                        .HasForeignKey("CageId")
+                        .OnDelete(DeleteBehavior.SetNull);
+                });
+
+            modelBuilder.Entity("Core.Models.Comment", b =>
+                {
+                    b.HasOne("Core.Models.Animal", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Core.Models.Treatment", b =>
+                {
+                    b.HasOne("Core.Models.Animal", null)
+                        .WithMany("Treatments")
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.SetNull);
+                });
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Animal>().HasData(
                 new Animal() { Id = 1, Name = "Carolientje", EstimatedAge = 18, Description = "Een mooie lapjeskat", DogOrCat = "cat", Breed = "LapjesKat", Gender = "f", DateOfArrival = new DateTime(2020, 06, 08), SafeForKids = true, CastratedOrSterilized = true, ReasonForLeavingOwner = "Eigenaar had het te druk met werk.", Adoptable = true },

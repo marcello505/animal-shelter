@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.DomainServices;
 using Core.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure
 {
@@ -53,10 +54,10 @@ namespace Infrastructure
         public IEnumerable<Animal> GetAll()
         {
             var treatmentRepository = new TreatmentSqlRepository();
-            var result = _context.Animals;
-            if(result != null) foreach(Animal element in result){
-                element.Treatments = treatmentRepository.GetByAnimalId(element.Id).ToList();
-            }
+            var result = _context.Animals.Include(a => a.Comments).Include(a => a.Treatments).ToList();
+            //if(result != null) foreach(Animal element in result){
+            //    element.Treatments = treatmentRepository.GetByAnimalId(element.Id).ToList();
+            //}
             return result;
         }
 
