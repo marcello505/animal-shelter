@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using ManagementApplication.Models;
 using Microsoft.AspNetCore.Identity;
 using ManagementApplication.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ManagementApplication.Controllers
 {

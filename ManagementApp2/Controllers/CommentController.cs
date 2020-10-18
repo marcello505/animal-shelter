@@ -6,6 +6,7 @@ using Core.DomainServices;
 using Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -36,6 +37,7 @@ namespace ManagementApplication.Controllers
         {
             comment.Id = 0;
             comment.DateOfComment = DateTime.Now;
+            comment.CommentMadeBy = User.Identity.Name;
             _context.Add(comment);
             return RedirectToAction("Details", "Animal", new { id = comment.AnimalId });
         }

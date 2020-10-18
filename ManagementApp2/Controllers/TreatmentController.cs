@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Core.DomainServices;
 using Core.Models;
 using ManagementApplication.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -21,6 +22,8 @@ namespace ManagementApplication.Controllers
             _context = context;
             _animalRepository = animalRepository;
         }
+
+        [Authorize]
         public IActionResult Index()
         {
             var result = _context.GetAll().ToViewModel();
@@ -35,12 +38,14 @@ namespace ManagementApplication.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create(Treatment treatment)
         {
             if(!treatment.IsValid()) ModelState.AddModelError("Description", "For this type of treatment there needs to be description filled out. For chippings put in the GUID of the chip, for Euthanasia put in the reason for it.");
@@ -61,12 +66,14 @@ namespace ManagementApplication.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Edit(int id)
         {
             return View(_context.Get(id));
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Edit(Treatment treatment)
         {
             if(!treatment.IsValid()) ModelState.AddModelError("Description", "For this type of treatment there needs to be description filled out. For chippings put in the GUID of the chip, for Euthanasia put in the reason for it.");
@@ -86,18 +93,21 @@ namespace ManagementApplication.Controllers
             return ModelState.IsValid ? (IActionResult)RedirectToAction("Index") : View(treatment);
         }
 
+        [Authorize]
         public IActionResult Details(int id)
         {
             return View(_context.Get(id)?.ToViewModel()?? new TreatmentViewModel { Id = id});
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             return View(_context.Get(id) ?? new Treatment { Id = id });
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Delete(Treatment treatment)
         {
             _context.Delete(treatment);

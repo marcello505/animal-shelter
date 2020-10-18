@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Core.DomainServices;
 using Core.Models;
 using ManagementApplication.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -21,17 +22,21 @@ namespace ManagementApplication.Controllers
             _context = context;
             _cageRepository = cageRepository;
         }
+
+        [Authorize]
         public IActionResult Index()
         {
             return View(_context.GetAll().ToViewModel());
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Edit(int id)
         {
             return View(_context.Get(id));
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Edit(Animal animal)
         {
@@ -46,12 +51,14 @@ namespace ManagementApplication.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create(NewAnimalViewModel animal)
         {
             var result = animal.ToDomainModel();
@@ -66,18 +73,21 @@ namespace ManagementApplication.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             return View(_context.Get(id));
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Delete(Animal animal)
         {
             _context.Delete(animal);
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public IActionResult Details(int id)
         {
             return View(_context.Get(id));

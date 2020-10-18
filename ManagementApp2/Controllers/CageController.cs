@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Core.DomainServices;
 using Core.Models;
 using ManagementApplication.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -20,11 +21,13 @@ namespace ManagementApplication.Controllers
             _context = context;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             return View(_context.GetAll().ToViewModel());
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
@@ -32,6 +35,7 @@ namespace ManagementApplication.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create(NewCageViewModel newCage)
         {
             _context.Add(newCage.ToDomainModel());
@@ -39,11 +43,13 @@ namespace ManagementApplication.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             return View(_context.Get(id));
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Delete(Cage cage)
         {
@@ -52,6 +58,7 @@ namespace ManagementApplication.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public IActionResult Details(int id)
         {
             return View(_context.Get(id));
