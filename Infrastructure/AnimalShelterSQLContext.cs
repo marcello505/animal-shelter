@@ -10,6 +10,7 @@ namespace Infrastructure
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Treatment> Treatments { get; set; }
         public DbSet<Cage> Cages { get; set; }
+        public DbSet<AnimalSubmission> AnimalSubmissions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
