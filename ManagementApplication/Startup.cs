@@ -7,6 +7,8 @@ using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,10 +27,18 @@ namespace ManagementApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            //Uncomment this later when i got the Identity SQL server setup.
+            services.AddDbContext<IdentitySqlContext>(options => options.UseSqlServer(
+                Configuration.GetConnectionString("Security")));
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<IdentitySqlContext>()
+                .AddDefaultTokenProviders();
+
             services.AddScoped<IAnimalRepository, AnimalSqlRepository>();
             services.AddScoped<ICageRepository, CageSqlRepository>();
             services.AddScoped<ITreatmentRepository, TreatmentSqlRepository>();
-            //services.AddScoped<ICommentRepository, CommentSqlRepository>();
+            services.AddScoped<ICommentRepository, CommentSqlRepository>();
             services.AddControllersWithViews();
         }
 

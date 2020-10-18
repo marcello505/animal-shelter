@@ -2,15 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Core.DomainServices
 {
     public interface ICommentRepository
     {
         public IEnumerable<Comment> GetAll();
-        public void Add(Comment comment);
-        public void Update(Comment comment);
-        public void Delete(int id);
+        public Task Add(Comment comment);
 
     }
 }

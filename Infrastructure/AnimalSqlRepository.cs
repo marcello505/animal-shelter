@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Core.DomainServices;
 using Core.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure
 {
@@ -17,10 +19,10 @@ namespace Infrastructure
             _context = new AnimalShelterSqlContext();
         }
         
-        public void Add(Animal animal)
+        public async Task Add(Animal animal)
         {
             _context.Animals.Add(animal);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public void Delete(Animal animal)
@@ -43,19 +45,13 @@ namespace Infrastructure
 
         public Animal Get(int id)
         {
-            var treatmentRepository = new TreatmentSqlRepository();
-            var result = _context.Animals.SingleOrDefault(p => p.Id == id);
-            if (result != null) result.Treatments = treatmentRepository.GetByAnimalId(id).ToList();
+            var result = _context.Animals.Include(a => a.Comments).Include(a => a.Treatments).SingleOrDefault(p => p.Id == id);
             return result;
         }
 
         public IEnumerable<Animal> GetAll()
         {
-            var treatmentRepository = new TreatmentSqlRepository();
-            var result = _context.Animals;
-            if(result != null) foreach(Animal element in result){
-                element.Treatments = treatmentRepository.GetByAnimalId(element.Id).ToList();
-            }
+            var result = _context.Animals.Include(a => a.Comments).Include(a => a.Treatments).ToList();
             return result;
         }
 
@@ -64,9 +60,10 @@ namespace Infrastructure
             return GetAll().Where(a => a.CageId == cageId);
         }
 
-        public void Update(Animal animal)
+        public async Task Update(Animal animal)
         {
-            throw new NotImplementedException();
+            _context.Animals.Update(animal);
+            await _context.SaveChangesAsync();
         }
     }
 }

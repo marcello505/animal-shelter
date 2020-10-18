@@ -15,16 +15,16 @@ namespace Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
+                .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.0-rc.1.20451.13");
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Core.Models.Animal", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Adoptable")
                         .HasColumnType("bit");
@@ -88,6 +88,38 @@ namespace Infrastructure.Migrations
                     b.HasIndex("CageId");
 
                     b.ToTable("Animals");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Adoptable = true,
+                            Breed = "LapjesKat",
+                            CastratedOrSterilized = true,
+                            DateOfArrival = new DateTime(2020, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Een mooie lapjeskat",
+                            DogOrCat = "cat",
+                            EstimatedAge = 18,
+                            Gender = "f",
+                            Name = "Carolientje",
+                            ReasonForLeavingOwner = "Eigenaar had het te druk met werk.",
+                            SafeForKids = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Adoptable = true,
+                            Breed = "Amerikaanse Korthaar",
+                            CastratedOrSterilized = true,
+                            DateOfArrival = new DateTime(2020, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Een brutale kater",
+                            DogOrCat = "cat",
+                            EstimatedAge = 15,
+                            Gender = "m",
+                            Name = "Tom",
+                            ReasonForLeavingOwner = "Veel te eigenwijs en iritant.",
+                            SafeForKids = false
+                        });
                 });
 
             modelBuilder.Entity("Core.Models.Cage", b =>
@@ -95,7 +127,7 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("MaximumAnimals")
                         .HasColumnType("int");
@@ -110,7 +142,10 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AnimalId")
+                        .HasColumnType("int");
 
                     b.Property<string>("CommentMadeBy")
                         .IsRequired()
@@ -123,12 +158,9 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("DateOfComment")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("TreatmentId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("TreatmentId");
+                    b.HasIndex("AnimalId");
 
                     b.ToTable("Comments");
                 });
@@ -138,13 +170,13 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("AnimalId")
                         .HasColumnType("int");
 
                     b.Property<decimal?>("Cost")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<DateTime>("DateOfTreatment")
                         .HasColumnType("datetime2");
@@ -167,42 +199,48 @@ namespace Infrastructure.Migrations
                     b.HasIndex("AnimalId");
 
                     b.ToTable("Treatments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AnimalId = 1,
+                            DateOfTreatment = new DateTime(2005, 5, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TreatmentDoneBy = "Marcello",
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AnimalId = 2,
+                            DateOfTreatment = new DateTime(2008, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TreatmentDoneBy = "Dirk",
+                            Type = 1
+                        });
                 });
 
             modelBuilder.Entity("Core.Models.Animal", b =>
                 {
                     b.HasOne("Core.Models.Cage", null)
                         .WithMany("Animals")
-                        .HasForeignKey("CageId");
+                        .HasForeignKey("CageId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("Core.Models.Comment", b =>
                 {
-                    b.HasOne("Core.Models.Treatment", null)
+                    b.HasOne("Core.Models.Animal", null)
                         .WithMany("Comments")
-                        .HasForeignKey("TreatmentId");
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Core.Models.Treatment", b =>
                 {
                     b.HasOne("Core.Models.Animal", null)
                         .WithMany("Treatments")
-                        .HasForeignKey("AnimalId");
-                });
-
-            modelBuilder.Entity("Core.Models.Animal", b =>
-                {
-                    b.Navigation("Treatments");
-                });
-
-            modelBuilder.Entity("Core.Models.Cage", b =>
-                {
-                    b.Navigation("Animals");
-                });
-
-            modelBuilder.Entity("Core.Models.Treatment", b =>
-                {
-                    b.Navigation("Comments");
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 #pragma warning restore 612, 618
         }

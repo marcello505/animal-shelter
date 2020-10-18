@@ -1,0 +1,48 @@
+﻿@model Core.Models.Treatment
+
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <!--<input asp-for="Type" class="form-control" />-->
+                <br />
+                <input asp-for="Type" type="radio" name="Type" value="0" checked/> Sterilization <br />
+                <input asp-for="Type" type="radio" name="Type" value="1" /> Castration <br />
+                <input asp-for="Type" type="radio" name="Type" value="2" /> Vaccination <br />
+                <input asp-for="Type" type="radio" name="Type" value="3" /> Operation <br />
+                <input asp-for="Type" type="radio" name="Type" value="4" /> Chipping <br />
+                <input asp-for="Type" type="radio" name="Type" value="5" /> Euthanasia
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" ></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cost" class="control-label"></label>
+                <input asp-for="Cost" class="form-control" placeholder="€ 00,00" />
+                <span asp-validation-for="Cost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinimumAgeInMonths" class="control-label"></label>
+                <input asp-for="MinimumAgeInMonths" class="form-control" />
+                <span asp-validation-for="MinimumAgeInMonths" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TreatmentDoneBy" class="control-label"></label>
+                <input asp-for="TreatmentDoneBy" class="form-control" />
+                <span asp-validation-for="TreatmentDoneBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfTreatment" class="control-label"></label>
+                <input asp-for="DateOfTreatment" class="form-control" />
+                <span asp-validation-for="DateOfTreatment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnimalId" class="control-label"></label>
+                <input asp-for="AnimalId" class="form-control" />
+                <span asp-validation-for="AnimalId" class="text-danger"></span>
+            </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
