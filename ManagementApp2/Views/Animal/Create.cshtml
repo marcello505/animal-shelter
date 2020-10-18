@@ -1,0 +1,121 @@
+﻿@model ManagementApplication.Models.NewAnimalViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>New Animal</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfBirth" class="control-label"></label>
+                <input asp-for="DateOfBirth" class="form-control" />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EstimatedAge" class="control-label"></label>
+                <input asp-for="EstimatedAge" class="form-control" />
+                <span asp-validation-for="EstimatedAge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DogOrCat" class="control-label"></label>
+                <!--<input asp-for="DogOrCat" class="form-control" />-->
+                <br />
+                <input asp-for="DogOrCat"type="radio" name="DogOrCat" value="dog" />Dog <br />
+                <input asp-for="DogOrCat"type="radio" name="DogOrCat" value="cat" />Cat
+                <span asp-validation-for="DogOrCat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Breed" class="control-label"></label>
+                <input asp-for="Breed" class="form-control" />
+                <span asp-validation-for="Breed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <br />
+                <input asp-for="Gender"type="radio" name="Gender" value="f" />Female <br />
+                <input asp-for="Gender"type="radio" name="Gender" value="m" />Male
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageURL" class="control-label"></label>
+                <input asp-for="ImageURL" class="form-control" />
+                <span asp-validation-for="ImageURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfArrival" class="control-label"></label>
+                <input asp-for="DateOfArrival" class="form-control" />
+                <span asp-validation-for="DateOfArrival" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfAdoption" class="control-label"></label>
+                <input asp-for="DateOfAdoption" class="form-control" />
+                <span asp-validation-for="DateOfAdoption" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfDeath" class="control-label"></label>
+                <input asp-for="DateOfDeath" class="form-control" />
+                <span asp-validation-for="DateOfDeath" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CastratedOrSterilized" /> @Html.DisplayNameFor(model => model.CastratedOrSterilized)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="SafeForKids" class="control-label"></label>
+                <br />
+                <input asp-for="SafeForKids"type="radio" name="SafeForKids" value="true" />True <br />
+                <input asp-for="SafeForKids"type="radio" name="SafeForKids" value="false" />False <br />
+                <input asp-for="SafeForKids"type="radio" name="SafeForKids" value="null" />Unknown <br />
+                <span asp-validation-for="SafeForKids" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReasonForLeavingOwner" class="control-label"></label>
+                <textarea asp-for="ReasonForLeavingOwner" class="form-control"></textarea>
+                <span asp-validation-for="ReasonForLeavingOwner" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Adoptable" /> @Html.DisplayNameFor(model => model.Adoptable)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdoptedBy" class="control-label"></label>
+                <input asp-for="AdoptedBy" class="form-control" />
+                <span asp-validation-for="AdoptedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CageId" class="control-label"></label>
+                <input asp-for="CageId" asp-items="Model.FreeCages" class="form-control" />
+                <span asp-validation-for="CageId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
