@@ -6,16 +6,21 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ManagementApplication.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace ManagementApplication.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _logger = logger;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public IActionResult Index()
@@ -26,6 +31,40 @@ namespace ManagementApplication.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult Login(string returnUrl)
+        {
+            return View(new LoginModel { ReturnUrl = returnUrl});
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginModel loginModel)
+        {
+            var user = await _userManager.FindByNameAsync(loginModel.Username);
+
+            if(user != null)
+            {
+                var signInResult = await _signInManager.PasswordSignInAsync(user, loginModel.Password, false, false);
+                if (signInResult.Succeeded)
+                {
+                    return Redirect(loginModel?.ReturnUrl ?? "/Animal/Index");
+
+                }
+                ModelState.AddModelError("", "Password was not correct.");
+            }
+            else
+            {
+                ModelState.AddModelError("", "User was not found");
+            }
+
+            return View(loginModel);
+        }
+
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

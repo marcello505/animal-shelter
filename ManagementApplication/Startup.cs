@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,10 +29,11 @@ namespace ManagementApplication
         {
 
             //Uncomment this later when i got the Identity SQL server setup.
-            //services.AddDbContext<IdentitySqlContext>();
-            //services.AddIdentity<IdentityUser, IdentityRole>()
-            //    .AddEntityFrameworkStores<IdentitySqlContext>()
-            //    .AddDefaultTokenProviders();
+            services.AddDbContext<IdentitySqlContext>(options => options.UseSqlServer(
+                Configuration.GetConnectionString("Security")));
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<IdentitySqlContext>()
+                .AddDefaultTokenProviders();
 
             services.AddScoped<IAnimalRepository, AnimalSqlRepository>();
             services.AddScoped<ICageRepository, CageSqlRepository>();
