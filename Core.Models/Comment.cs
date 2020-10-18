@@ -11,8 +11,10 @@ namespace Core.Models
         [Required]
         public string CommentText { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime DateOfComment { get; set; }
         [Required]
+        [DataType(DataType.EmailAddress)]
         public string CommentMadeBy { get; set; }
         [ForeignKey("Animal")]
         public int? AnimalId { get; set; }

@@ -45,19 +45,13 @@ namespace Infrastructure
 
         public Animal Get(int id)
         {
-            var treatmentRepository = new TreatmentSqlRepository();
-            var result = _context.Animals.SingleOrDefault(p => p.Id == id);
-            if (result != null) result.Treatments = treatmentRepository.GetByAnimalId(id).ToList();
+            var result = _context.Animals.Include(a => a.Comments).Include(a => a.Treatments).SingleOrDefault(p => p.Id == id);
             return result;
         }
 
         public IEnumerable<Animal> GetAll()
         {
-            var treatmentRepository = new TreatmentSqlRepository();
             var result = _context.Animals.Include(a => a.Comments).Include(a => a.Treatments).ToList();
-            //if(result != null) foreach(Animal element in result){
-            //    element.Treatments = treatmentRepository.GetByAnimalId(element.Id).ToList();
-            //}
             return result;
         }
 

@@ -127,10 +127,11 @@
     </dl>
 </div>
 <div>
-    <h4>Comments</h4>
-    <partial name="../Comment/List.cshtml" model="Model.Comments" />
-</div>
-<div>
     @Html.ActionLink("Edit", "Edit", new {id = Model.Id }) |
     <a asp-action="Index">Back to List</a>
+</div>
+<div>
+    <h4>Comments</h4>
+    @Html.ActionLink("Create New", "Create", "Comment", new { id=Model.Id })
+    <partial name="../Comment/List.cshtml" model="Model.Comments" />
 </div>

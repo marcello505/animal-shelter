@@ -28,7 +28,7 @@ namespace ManagementApplication
             services.AddScoped<IAnimalRepository, AnimalSqlRepository>();
             services.AddScoped<ICageRepository, CageSqlRepository>();
             services.AddScoped<ITreatmentRepository, TreatmentSqlRepository>();
-            //services.AddScoped<ICommentRepository, CommentSqlRepository>();
+            services.AddScoped<ICommentRepository, CommentSqlRepository>();
             services.AddControllersWithViews();
         }
 
