@@ -11,5 +11,6 @@ namespace Core.DomainServices
         public IEnumerable<AnimalSubmission> GetAll();
         public AnimalSubmission Get(int id);
         public Task Add(AnimalSubmission animalSubmission);
+        public Task Update(AnimalSubmission animalSubmission);
     }
 }

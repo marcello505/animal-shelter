@@ -11,6 +11,7 @@ namespace Infrastructure
         public DbSet<Treatment> Treatments { get; set; }
         public DbSet<Cage> Cages { get; set; }
         public DbSet<AnimalSubmission> AnimalSubmissions { get; set; }
+        public DbSet<AdoptionRequest> AdoptionRequests { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -28,6 +28,7 @@ namespace WebService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IAnimalRepository, AnimalSqlRepository>();
+            services.AddScoped<IAnimalSubmissionRepository, AnimalSubmissionSqlRepository>();
             services.AddControllers();
             services.AddSwaggerGen();
         }
