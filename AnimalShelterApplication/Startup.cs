@@ -46,6 +46,7 @@ namespace AnimalShelterApplication
             services.AddSingleton<HttpClient>(http => httpClient);
 
             services.AddScoped<IAnimalSubmissionRepository, AnimalSubmissionHttpRepository>();
+            services.AddScoped<IAnimalRepository, AnimalHttpRepository>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
