@@ -37,6 +37,7 @@ namespace AnimalShelterApplication
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddSession();
 
             //Setup API connection.
             var httpClient = new HttpClient();
@@ -47,6 +48,10 @@ namespace AnimalShelterApplication
 
             services.AddScoped<IAnimalSubmissionRepository, AnimalSubmissionHttpRepository>();
             services.AddScoped<IAnimalRepository, AnimalHttpRepository>();
+            services.AddScoped<IAdoptionRequestRepository, AdoptionRequestSqlRepository>();
+
+            //Dit wordt alleen gebruik om het aantal vrije plekken aan te geven in het asiel.
+            services.AddScoped<ICageRepository, CageSqlRepository>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -68,6 +73,7 @@ namespace AnimalShelterApplication
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSession();
 
             app.UseRouting();
 

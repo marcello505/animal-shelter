@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AnimalShelterApplication.Models;
 using Core.DomainServices;
 using Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -49,6 +50,30 @@ namespace AnimalShelterApplication.Controllers
         public ActionResult Details(int id)
         {
             return View();
+        }
+
+        [Authorize]
+        public ActionResult Select(int id)
+        {
+            if(_context.Get(id) != null)
+            {
+                string key = null;
+                if (!HttpContext.Session.GetInt32("animal1").HasValue)
+                {
+                    key = "animal1";
+                }
+                else if (!HttpContext.Session.GetInt32("animal2").HasValue)
+                {
+                    key = "animal2";
+                }
+                else
+                {
+                    key = "animal3";
+                }
+                HttpContext.Session.SetInt32(key, id);
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

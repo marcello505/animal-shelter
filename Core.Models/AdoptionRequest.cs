@@ -16,13 +16,12 @@ namespace Core.Models
         [Required]
         [DataType(DataType.PhoneNumber)]
         public string Telephone { get; set; }
-        [ForeignKey("Animal")]
-        [Required]
-        public int AnimalId1 { get; set; }
-        [ForeignKey("Animal")]
-        public int? AnimalId2 { get; set; }
-        [ForeignKey("Animal")]
-        public int? AnimalId3 { get; set; }
+        [ForeignKey("Animal.Id")]
+        public int? Animal1 { get; set; }
+        [ForeignKey("Animal.Id")]
+        public int? Animal2 { get; set; }
+        [ForeignKey("Animal.Id")]
+        public int? Animal3 { get; set; }
 
     }
 }
