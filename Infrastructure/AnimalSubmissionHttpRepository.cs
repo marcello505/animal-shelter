@@ -1,12 +1,12 @@
 ﻿using Core.DomainServices;
 using Core.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Infrastructure
@@ -19,9 +19,12 @@ namespace Infrastructure
             _httpClient = httpClient;
         }
 
-        public Task Add(AnimalSubmission animalSubmission)
+        public async Task Add(AnimalSubmission animalSubmission)
         {
-            throw new NotImplementedException();
+            var json = JsonConvert.SerializeObject(animalSubmission);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync("api/v2/animalsubmissions", httpContent);
+            Console.WriteLine(response);
         }
 
         public AnimalSubmission Get(int id)
@@ -31,8 +34,7 @@ namespace Infrastructure
             if (response.IsSuccessStatusCode)
             {
                 var json = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-                result = JsonSerializer.Deserialize<AnimalSubmission>(json);
-                
+                result = JsonConvert.DeserializeObject<AnimalSubmission>(json);                
             }
             return result;
         }
@@ -44,14 +46,16 @@ namespace Infrastructure
             if (response.IsSuccessStatusCode)
             {
                 var json = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-                result = JsonSerializer.Deserialize<IEnumerable<AnimalSubmission>>(json);
+                result = JsonConvert.DeserializeObject<IEnumerable<AnimalSubmission>>(json);
             }
             return result;
         }
 
-        public Task Update(AnimalSubmission animalSubmission)
+        public async Task Update(AnimalSubmission animalSubmission)
         {
-            throw new NotImplementedException();
+            var json = JsonConvert.SerializeObject(animalSubmission);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PutAsync("api/v2/animalsubmissions/" + animalSubmission.Id, httpContent);
         }
     }
 }
