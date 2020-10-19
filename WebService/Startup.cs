@@ -29,6 +29,7 @@ namespace WebService
         {
             services.AddScoped<IAnimalRepository, AnimalSqlRepository>();
             services.AddScoped<IAnimalSubmissionRepository, AnimalSubmissionSqlRepository>();
+            services.AddScoped<IAdoptionRequestRepository, AdoptionRequestSqlRepository>();
             services.AddControllers();
             services.AddSwaggerGen();
         }
