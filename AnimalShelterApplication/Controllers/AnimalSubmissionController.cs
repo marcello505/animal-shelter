@@ -54,7 +54,7 @@ namespace AnimalShelterApplication.Controllers
             var result = _context.Get(id);
             if(result.OwnerName == User.Identity.Name)
             {
-                return View(_context.Get(id));
+                return View(result);
             }
             return RedirectToAction("Index");
         }

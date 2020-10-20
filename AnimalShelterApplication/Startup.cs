@@ -48,7 +48,7 @@ namespace AnimalShelterApplication
 
             services.AddScoped<IAnimalSubmissionRepository, AnimalSubmissionHttpRepository>();
             services.AddScoped<IAnimalRepository, AnimalHttpRepository>();
-            services.AddScoped<IAdoptionRequestRepository, AdoptionRequestSqlRepository>();
+            services.AddScoped<IAdoptionRequestRepository, AdoptionRequestHttpRepository>();
 
             //Dit wordt alleen gebruik om het aantal vrije plekken aan te geven in het asiel.
             services.AddScoped<ICageRepository, CageSqlRepository>();
