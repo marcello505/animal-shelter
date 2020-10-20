@@ -23,6 +23,12 @@ namespace Infrastructure
             await _context.SaveChangesAsync();
         }
 
+        public async Task Delete(AdoptionRequest adoptionRequest)
+        {
+            _context.AdoptionRequests.Remove(adoptionRequest);
+            await _context.SaveChangesAsync();
+        }
+
         public AdoptionRequest Get(int id)
         {
             return _context.AdoptionRequests.SingleOrDefault(adr => adr.Id == id);

@@ -27,6 +27,11 @@ namespace Infrastructure
             Console.WriteLine(response);
         }
 
+        public Task Delete(AnimalSubmission animalSubmission)
+        {
+            throw new NotImplementedException();
+        }
+
         public AnimalSubmission Get(int id)
         {
             AnimalSubmission result = null;

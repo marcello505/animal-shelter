@@ -39,6 +39,8 @@ namespace ManagementApplication
             services.AddScoped<ICageRepository, CageSqlRepository>();
             services.AddScoped<ITreatmentRepository, TreatmentSqlRepository>();
             services.AddScoped<ICommentRepository, CommentSqlRepository>();
+            services.AddScoped<IAdoptionRequestRepository, AdoptionRequestSqlRepository>();
+            services.AddScoped<IAnimalSubmissionRepository, AnimalSubmissionSqlRepository>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
