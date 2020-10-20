@@ -24,10 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\AdoptionRequest\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Update="Views\Cart\Complete.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
