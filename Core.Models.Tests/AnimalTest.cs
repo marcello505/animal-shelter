@@ -38,7 +38,7 @@ namespace Core.Models.Test
 
         //BR_5-3
         [Fact]
-        public void EstimatedAgeAndDateOfBirthBothSetRetrunsError()
+        public void EstimatedAgeAndDateOfBirthBothSetRetrunsNull()
         {
             //Arrange
             var sut = new Animal();
@@ -48,7 +48,7 @@ namespace Core.Models.Test
             sut.EstimatedAge = 1;
             
             //Assert
-            Assert.Throws<InvalidOperationException>(() => sut.Age);
+            Assert.Null(sut.Age);
         }
 
         //BR_5-4
@@ -57,9 +57,9 @@ namespace Core.Models.Test
         {
             //Arrange
             var sut = new Animal();
-            
+
             //Assert
-            Assert.Throws<InvalidOperationException>(() => sut.Age);
+            Assert.Null(sut.Age);
         }
 
         [Fact]
