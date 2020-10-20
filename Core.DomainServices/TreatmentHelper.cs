@@ -24,6 +24,7 @@ namespace Core.DomainServices
         {
             if (treatment.MinimumAgeInMonths != null) return true;
             if ((animal?.Age ?? 0) < treatment.MinimumAgeInMonths / 12) return false;
+            if (animal?.DateOfDeath.HasValue ?? true) return false; 
             return true;
         }
     }
