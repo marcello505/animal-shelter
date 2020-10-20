@@ -24,6 +24,11 @@ namespace Infrastructure
             var response = await _httpClient.PostAsync("api/v2/adoptionrequest", httpContent);
         }
 
+        public Task Delete(AdoptionRequest adoptionRequest)
+        {
+            throw new NotImplementedException();
+        }
+
         public AdoptionRequest Get(int id)
         {
             AdoptionRequest result = null;

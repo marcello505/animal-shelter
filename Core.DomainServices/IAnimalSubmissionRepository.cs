@@ -12,5 +12,6 @@ namespace Core.DomainServices
         public AnimalSubmission Get(int id);
         public Task Add(AnimalSubmission animalSubmission);
         public Task Update(AnimalSubmission animalSubmission);
+        public Task Delete(AnimalSubmission animalSubmission);
     }
 }

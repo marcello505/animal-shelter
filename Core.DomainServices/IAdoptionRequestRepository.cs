@@ -12,5 +12,6 @@ namespace Core.DomainServices
         public AdoptionRequest Get(int id);
         public Task Add(AdoptionRequest adoptionRequest);
         public Task Update(AdoptionRequest adoptionRequest);
+        public Task Delete(AdoptionRequest adoptionRequest);
     }
 }
