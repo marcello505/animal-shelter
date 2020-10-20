@@ -1,8 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Core.DomainServices;
+using HotChocolate;
+using HotChocolate.AspNetCore;
+using HotChocolate.Execution;
+using HotChocolate.Execution.Configuration;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using WebService.Controllers;
 
 namespace WebService
 {
@@ -27,6 +33,11 @@ namespace WebService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddGraphQL(sp => SchemaBuilder.New()
+                .AddQueryType<Query>()
+                .Create());
+
+
             services.AddScoped<IAnimalRepository, AnimalSqlRepository>();
             services.AddScoped<IAnimalSubmissionRepository, AnimalSubmissionSqlRepository>();
             services.AddScoped<IAdoptionRequestRepository, AdoptionRequestSqlRepository>();
@@ -43,6 +54,9 @@ namespace WebService
             }
 
             app.UseHttpsRedirection();
+
+            app.UseGraphQL("/api/v3");
+            app.UsePlayground();
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AnimalShelter v2 API"));
