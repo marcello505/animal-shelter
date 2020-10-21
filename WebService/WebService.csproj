@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <StartupObject></StartupObject>
+    <StartupObject>WebService.Program</StartupObject>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
 
