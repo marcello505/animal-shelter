@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Core.DomainServices
 {
@@ -9,8 +10,10 @@ namespace Core.DomainServices
     {
         public IEnumerable<Treatment> GetAll();
         public IEnumerable<Treatment> GetByAnimalId(int animalId);
-        public void Add(Treatment treatment);
-        public void Update(Treatment treatment);
-        public void Delete(int id);
+        public Treatment Get(int id);
+        public Task Add(Treatment treatment);
+        public Task Update(Treatment treatment);
+        public Task Delete(Treatment treatment);
+        public Task Delete(int id);
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Core.DomainServices;
+using Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -16,11 +18,13 @@ namespace WebService.Controllers
     {
         private readonly ILogger<AnimalsController> _logger;
         private readonly IAnimalRepository _context;
+        private readonly IAnimalSubmissionRepository _animalSubmissionRepository;
 
-        public AnimalsController(ILogger<AnimalsController> logger, IAnimalRepository animalRepository)
+        public AnimalsController(ILogger<AnimalsController> logger, IAnimalRepository animalRepository, IAnimalSubmissionRepository animalSubmissionRepository)
         {
             _logger = logger;
             _context = animalRepository;
+            _animalSubmissionRepository = animalSubmissionRepository;
         }
 
         // GET: api/<AnimalsController>
@@ -45,5 +49,6 @@ namespace WebService.Controllers
             if (animal != null) return Ok(animal);
             return NotFound();
         }
+
     }
 }
