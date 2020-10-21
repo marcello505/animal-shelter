@@ -1,0 +1,46 @@
+﻿@model AnimalShelterApplication.Models.AnimalFilterViewModel
+
+<h4>Filters</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DogOrCat" class="control-label"></label>
+                <select asp-for="DogOrCat" class="form-control">
+                    <option value="" selected>-----</option>
+                    <option value="dog">Dog</option>
+                    <option value="cat">Cat</option>
+                </select>
+                <span asp-validation-for="DogOrCat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <select asp-for="Gender" class="form-control">
+                    <option value="" selected>-----</option>
+                    <option value="m">Male</option>
+                    <option value="f">Female</option>
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SafeForKids" class="control-label"></label>
+                <select asp-for="SafeForKids" class="form-control">
+                    <option value="null" selected>------</option>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+                <span asp-validation-for="SafeForKids" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Filter" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

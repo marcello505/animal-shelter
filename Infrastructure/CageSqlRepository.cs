@@ -4,21 +4,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Infrastructure
 {
     public class CageSqlRepository : ICageRepository
     {
         private AnimalShelterSqlContext _context;
-        CageSqlRepository()
+        public CageSqlRepository()
         {
             _context = new AnimalShelterSqlContext();
         }
 
-        public void Add(Cage cage)
+        public async Task Add(Cage cage)
         {
             _context.Cages.Add(cage);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Delete(Cage cage)
+        {
+            _context.Cages.Remove(cage);
+            await _context.SaveChangesAsync();
         }
 
         public Cage Get(int id)
@@ -38,6 +45,18 @@ namespace Infrastructure
                 item.AddAnimalToCage(animalRepository.GetByCageId(item.Id));
             }
             return result;
+        }
+
+        public IEnumerable<Cage> GetAllFreeCages()
+        {
+            var animalRepository = new AnimalSqlRepository();
+            var result = _context.Cages;
+            foreach(Cage item in result)
+            {
+                item.AddAnimalToCage(animalRepository.GetByCageId(item.Id));
+            }
+            return result.Where(c => c.Animals.Count < c.MaximumAnimals);
+
         }
     }
 }

@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Core.Models.Animal>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Animals</h1>
+<div>
+    <partial model="ViewBag.Filters" name="Filters" />
+</div>
+<div>
+    <partial model="Model" name="List" />
+</div>

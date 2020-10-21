@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Infrastructure
 {
-    class TreatmentSqlRepository : ITreatmentRepository
+    public class TreatmentSqlRepository : ITreatmentRepository
     {
         private AnimalShelterSqlContext _context;
 
@@ -16,12 +17,13 @@ namespace Infrastructure
             _context = new AnimalShelterSqlContext();
         }
 
-        public void Add(Treatment treatment)
+        public async Task Add(Treatment treatment)
         {
-            throw new NotImplementedException();
+            _context.Treatments.Add(treatment);
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public Task Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -31,14 +33,26 @@ namespace Infrastructure
             return _context.Treatments;
         }
 
-        public void Update(Treatment treatment)
+        public async Task Update(Treatment treatment)
         {
-            throw new NotImplementedException();
+            _context.Treatments.Update(treatment);
+            await _context.SaveChangesAsync();
         }
 
         public IEnumerable<Treatment> GetByAnimalId(int animalId)
         {
             return _context.Treatments.Where(t => t.AnimalId == animalId);
+        }
+
+        public Treatment Get(int id)
+        {
+            return _context.Treatments.SingleOrDefault(t => t.Id == id);
+        }
+
+        public async Task Delete(Treatment treatment)
+        {
+            _context.Treatments.Remove(treatment);
+            await _context.SaveChangesAsync();
         }
     }
 }

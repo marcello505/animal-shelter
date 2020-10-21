@@ -9,26 +9,27 @@ namespace Core.Models
     {
         public enum Types
         {
-            Sterilization,
-            Castration,
-            Vaccination,
-            Operation,
-            Chipping,
-            Euthanasia
+            Sterilization = 0,
+            Castration = 1,
+            Vaccination = 2,
+            Operation = 3,
+            Chipping = 4,
+            Euthanasia = 5
         }
         [Key]
         public int Id { get; set; }
         [Required]
         public Types Type { get; set; }
-        public string? Description { get; set; }
+        public string Description { get; set; }
         [Column(TypeName = "decimal(18, 2)")]
+        [DataType(DataType.Currency)]
         public decimal? Cost { get; set; }
         public int? MinimumAgeInMonths { get; set; }
         [Required]
         public string TreatmentDoneBy { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime DateOfTreatment { get; set; }
-        public ICollection<Comment> Comments { get; set; }
 
         [ForeignKey("Animal")]
         public int? AnimalId { get; set; }
