@@ -9,19 +9,36 @@ a.navbar-brand {
 
 /* Provide sufficient contrast against white background */
 a {
-    color: #8AD8EA;
+    color: #57C231;
+}
+
+a:hover {
+    color: #35751D;
+    text-decoration: underline;
 }
 
 .btn-primary {
     color: #fff;
-    background-color: #43C8E6;
-    border-color: #476970;
+    background-color: #6EF53D;
+    border-color: #6EF53D;
+}
+
+.btn-primary:hover{
+    color: #fff;
+    background-color: #57C231;
+    border-color: #57C231;
+}
+
+.btn-secondary:hover{
+    color: #4F7541;
+    background-color: #fff;
+    border-color: #4F7541;
 }
 
 .btn-secondary {
-    color: #8AD8EA;
+    color: #A5F788;
     background-color: #fff;
-    border-color: #8AD8EA;
+    border-color: #A5F788;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
