@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Infrastructure;
 using Core.DomainServices;
+using ManagementApplication.Models;
 
 namespace ManagementApplication
 {
@@ -35,6 +36,15 @@ namespace ManagementApplication
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddAuthorization(o =>
+            {
+                o.AddPolicy("defaultpolicy", b =>
+                {
+                    b.RequireAuthenticatedUser();
+                    b.RequireClaim("Volunteer");
+                });
+            });
+
             services.AddScoped<IAnimalRepository, AnimalSqlRepository>();
             services.AddScoped<ICageRepository, CageSqlRepository>();
             services.AddScoped<ITreatmentRepository, TreatmentSqlRepository>();
@@ -42,6 +52,7 @@ namespace ManagementApplication
             services.AddScoped<IAdoptionRequestRepository, AdoptionRequestSqlRepository>();
             services.AddScoped<IAnimalSubmissionRepository, AnimalSubmissionSqlRepository>();
             services.AddControllersWithViews();
+            services.AddMvc(o => o.Conventions.Add(new AddAuthorizeFiltersControllerConvention()));
             services.AddRazorPages();
         }
 
