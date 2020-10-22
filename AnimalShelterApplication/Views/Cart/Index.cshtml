@@ -25,7 +25,8 @@
             <input asp-for="AnimalId1" type="hidden" />
             <partial name="List" model="Model.AnimalsView" />
             <div class="form-group">
-                <input type="submit" value="Submit" class="btn btn-primary" />
+                <input type="submit" value="Submit" class="btn-primary btn" />
+                <a asp-action="Clear" class="btn-secondary btn">Clear Cart</a>
             </div>
         </form>
     </div>
@@ -33,7 +34,6 @@
 
 <div>
     <a asp-action="Index">Back to List</a>
-    <a asp-action="Clear">Clear Cart.</a>
 </div>
 
 @section Scripts {

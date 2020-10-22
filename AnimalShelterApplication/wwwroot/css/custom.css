@@ -1,5 +1,6 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+@import url('https://fonts.googleapis.com/css2?family=Commissioner&family=Roboto&display=swap');
 
 a.navbar-brand {
   white-space: normal;
@@ -9,19 +10,45 @@ a.navbar-brand {
 
 /* Provide sufficient contrast against white background */
 a {
-    color: #8AD8EA;
+    color: #57C231;
+}
+
+h1, h2, h3, h4, h5{
+    font-family: 'Commissioner', sans-serif;
+
+}
+
+p{
+    font-family: 'Roboto', sans-serif;
+}
+
+a:hover {
+    color: #35751D;
+    text-decoration: underline;
 }
 
 .btn-primary {
     color: #fff;
-    background-color: #43C8E6;
-    border-color: #476970;
+    background-color: #6EF53D;
+    border-color: #6EF53D;
+}
+
+.btn-primary:hover{
+    color: #fff;
+    background-color: #57C231;
+    border-color: #57C231;
+}
+
+.btn-secondary:hover{
+    color: #4F7541;
+    background-color: #fff;
+    border-color: #4F7541;
 }
 
 .btn-secondary {
-    color: #fff;
-    background-color: #8AD8EA;
-    border-color: #476970;
+    color: #A5F788;
+    background-color: #fff;
+    border-color: #A5F788;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
