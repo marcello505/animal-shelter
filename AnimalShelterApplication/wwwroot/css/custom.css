@@ -1,5 +1,6 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+@import url('https://fonts.googleapis.com/css2?family=Commissioner&family=Roboto&display=swap');
 
 a.navbar-brand {
   white-space: normal;
@@ -10,6 +11,15 @@ a.navbar-brand {
 /* Provide sufficient contrast against white background */
 a {
     color: #57C231;
+}
+
+h1, h2, h3, h4, h5{
+    font-family: 'Commissioner', sans-serif;
+
+}
+
+p{
+    font-family: 'Roboto', sans-serif;
 }
 
 a:hover {
