@@ -10,12 +10,12 @@ using HotChocolate.Execution;
 
 namespace WebService.Controllers
 {
-    public class Query
+    public class QueriesGraphQL
     {
         private readonly IAdoptionRequestRepository _adoptionRequestRepository;
         private readonly IAnimalRepository _animalRepository;
         private readonly IAnimalSubmissionRepository _animalSubmissionRepository;
-        public Query(IAdoptionRequestRepository adoptionRequestRepository, IAnimalRepository animalRepository, IAnimalSubmissionRepository animalSubmissionRepository)
+        public QueriesGraphQL(IAdoptionRequestRepository adoptionRequestRepository, IAnimalRepository animalRepository, IAnimalSubmissionRepository animalSubmissionRepository)
         {
             _adoptionRequestRepository = adoptionRequestRepository;
             _animalRepository = animalRepository;
