@@ -34,7 +34,7 @@ namespace WebService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGraphQL(sp => SchemaBuilder.New()
-                .AddQueryType<Query>()
+                .AddQueryType<QueriesGraphQL>()
                 .Create());
 
 
