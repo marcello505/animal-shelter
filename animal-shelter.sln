@@ -21,12 +21,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebService", "WebService\We
 		{0959ACC7-2CF5-4EEB-99B1-29C3D3580EDD} = {0959ACC7-2CF5-4EEB-99B1-29C3D3580EDD}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Tests", "Infrastructure.Tests\Infrastructure.Tests.csproj", "{1242D679-38FF-4469-B555-41FC0868B1FC}"
-	ProjectSection(ProjectDependencies) = postProject
-		{364FD108-19A6-4B4E-8D7A-1A75FD035530} = {364FD108-19A6-4B4E-8D7A-1A75FD035530}
-		{0959ACC7-2CF5-4EEB-99B1-29C3D3580EDD} = {0959ACC7-2CF5-4EEB-99B1-29C3D3580EDD}
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManagementApplication", "ManagementApp2\ManagementApplication.csproj", "{C0A39E00-9C06-4426-A33F-D2B45A311A57}"
 	ProjectSection(ProjectDependencies) = postProject
 		{364FD108-19A6-4B4E-8D7A-1A75FD035530} = {364FD108-19A6-4B4E-8D7A-1A75FD035530}
@@ -34,7 +28,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManagementApplication", "Ma
 		{0959ACC7-2CF5-4EEB-99B1-29C3D3580EDD} = {0959ACC7-2CF5-4EEB-99B1-29C3D3580EDD}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalShelterApplication", "AnimalShelterApplication\AnimalShelterApplication.csproj", "{3B112664-CC06-4016-B81F-DF5FB5492BF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimalShelterApplication", "AnimalShelterApplication\AnimalShelterApplication.csproj", "{3B112664-CC06-4016-B81F-DF5FB5492BF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,10 +56,6 @@ Global
 		{1D199EF3-71FA-468D-AA86-07D5A602E8D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D199EF3-71FA-468D-AA86-07D5A602E8D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D199EF3-71FA-468D-AA86-07D5A602E8D0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1242D679-38FF-4469-B555-41FC0868B1FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1242D679-38FF-4469-B555-41FC0868B1FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1242D679-38FF-4469-B555-41FC0868B1FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1242D679-38FF-4469-B555-41FC0868B1FC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C0A39E00-9C06-4426-A33F-D2B45A311A57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C0A39E00-9C06-4426-A33F-D2B45A311A57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0A39E00-9C06-4426-A33F-D2B45A311A57}.Release|Any CPU.ActiveCfg = Release|Any CPU
