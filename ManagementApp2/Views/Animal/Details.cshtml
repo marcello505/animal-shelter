@@ -1,4 +1,5 @@
-﻿@model Core.Models.Animal
+﻿@using Core.Models
+@model Core.Models.Animal
 
 @{
     ViewData["Title"] = "Details";
@@ -129,6 +130,11 @@
 <div>
     @Html.ActionLink("Edit", "Edit", new {id = Model.Id }) |
     <a asp-action="Index">Back to List</a>
+</div>
+<div>
+    <h4>Treatments</h4>
+    @Html.ActionLink("Create New", "Create", "Treatment", new Treatment(){AnimalId = Model.Id})
+    <partial name="../Treatment/List.cshtml" model="Model.Treatments" />
 </div>
 <div>
     <h4>Comments</h4>
