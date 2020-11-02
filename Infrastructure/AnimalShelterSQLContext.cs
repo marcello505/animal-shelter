@@ -26,7 +26,7 @@ namespace Infrastructure
                     b.HasOne("Core.Models.Cage", null)
                         .WithMany("Animals")
                         .HasForeignKey("CageId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Core.Models.Comment", b =>
@@ -42,7 +42,7 @@ namespace Infrastructure
                     b.HasOne("Core.Models.Animal", null)
                         .WithMany("Treatments")
                         .HasForeignKey("AnimalId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Animal>().HasData(
