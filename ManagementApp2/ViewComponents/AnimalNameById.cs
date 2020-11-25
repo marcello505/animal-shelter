@@ -18,7 +18,7 @@ namespace ManagementApplication.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync(int animalId)
         {
             var animal = await Task.Run(() => _context.Get(animalId));
-            return View(animal.Name);
+            return View("default", animal.Name);
         }
     }
 }

@@ -134,7 +134,7 @@
 <div>
     <h4>Treatments</h4>
     @Html.ActionLink("Create New", "Create", "Treatment", new Treatment(){AnimalId = Model.Id})
-    <partial name="../Treatment/List.cshtml" model="Model.Treatments" />
+    <partial name="../Treatment/ListNonViewmodel.cshtml" model="Model.Treatments" />
 </div>
 <div>
     <h4>Comments</h4>
