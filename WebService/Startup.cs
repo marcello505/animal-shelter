@@ -18,6 +18,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using WebService.Controllers;
+using WebService.Controllers.GraphQL;
 
 namespace WebService
 {
@@ -35,7 +36,7 @@ namespace WebService
         {
             services.AddGraphQL(sp => SchemaBuilder.New()
                 .AddQueryType<QueriesGraphQL>()
-                //.AddMutationType<MutationsGraphQL>()
+                .AddMutationType<MutationsGraphQL>()
                 .Create());
 
 
