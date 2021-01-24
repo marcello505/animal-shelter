@@ -25,7 +25,7 @@ namespace ManagementApplication.Models
         public string Breed { get; set; }
         [Required]
         public string Gender { get; set; }
-        public string ImageURL { get; set; }
+        public byte[] ImageURL { get; set; }
         [Required]
         [DataType(DataType.Date)]
         public DateTime DateOfArrival { get; set; }

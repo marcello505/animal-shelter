@@ -7,10 +7,22 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="Migrations\20201018213439_Full_Database_EverythingWentToShit.cs" />
+      <Compile Remove="Migrations\20201018213439_Full_Database_EverythingWentToShit.Designer.cs" />
+      <Compile Remove="Migrations\20201018234146_Added_AnimalSubmissions.cs" />
+      <Compile Remove="Migrations\20201018234146_Added_AnimalSubmissions.Designer.cs" />
+      <Compile Remove="Migrations\20201019001432_Added_AdoptionRequests.cs" />
+      <Compile Remove="Migrations\20201019001432_Added_AdoptionRequests.Designer.cs" />
       <Compile Remove="Migrations\20201019222147_AddedAdoptionRequestConnection.cs" />
       <Compile Remove="Migrations\20201019222147_AddedAdoptionRequestConnection.Designer.cs" />
       <Compile Remove="Migrations\20201019222733_AddedAdoptionDeleteActions.cs" />
       <Compile Remove="Migrations\20201019222733_AddedAdoptionDeleteActions.Designer.cs" />
+      <Compile Remove="Migrations\20201019233805_RedoneAdoptionRequest.cs" />
+      <Compile Remove="Migrations\20201019233805_RedoneAdoptionRequest.Designer.cs" />
+      <Compile Remove="Migrations\20210124181031_image.cs" />
+      <Compile Remove="Migrations\20210124181031_image.Designer.cs" />
+      <Compile Remove="Migrations\20210124181413_ImageRedo.cs" />
+      <Compile Remove="Migrations\20210124181413_ImageRedo.Designer.cs" />
     </ItemGroup>
 
     <ItemGroup>

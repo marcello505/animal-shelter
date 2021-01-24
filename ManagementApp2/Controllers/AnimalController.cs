@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.DomainServices;
 using Core.Models;
 using ManagementApplication.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -38,7 +40,7 @@ namespace ManagementApplication.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult Edit(Animal animal)
+        public async Task<IActionResult> Edit(Animal animal, List<IFormFile> ImageURL)
         {
             if (!animal.Age.HasValue) ModelState.AddModelError("Age", "Either EstimatedAge or DateOfBirth need to be filled in. But not both.");
             //Dit kijkt of de animal aan de kooi kan worden toegevoegd. Het kijkt ook of de kooi uberhaupt bestaat.
@@ -46,7 +48,20 @@ namespace ManagementApplication.Controllers
 
             if (!ModelState.IsValid) return View(animal);
 
-            _context.Update(animal);
+            foreach(var item in ImageURL)
+            {
+                if(item.Length > 0)
+                {
+
+                    using(var stream = new MemoryStream())
+                    {
+                        await item.CopyToAsync(stream);
+                        animal.ImageURL = stream.ToArray();
+                    }
+                }
+            }
+
+            await _context.Update(animal);
             return RedirectToAction("Index");
         }
 
@@ -59,8 +74,20 @@ namespace ManagementApplication.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Create(NewAnimalViewModel animal)
+        public async Task<IActionResult> Create(NewAnimalViewModel animal, List<IFormFile> ImageURL)
         {
+            foreach(var item in ImageURL)
+            {
+                if(item.Length > 0)
+                {
+
+                    using(var stream = new MemoryStream())
+                    {
+                        await item.CopyToAsync(stream);
+                        animal.ImageURL = stream.ToArray();
+                    }
+                }
+            }
             var result = animal.ToDomainModel();
             if (!result.Age.HasValue) ModelState.AddModelError("Age", "Either EstimatedAge or DateOfBirth need to be filled in. But not both.");
             //Dit kijkt of de animal aan de kooi kan worden toegevoegd. Het kijkt ook of de kooi uberhaupt bestaat.
@@ -68,7 +95,7 @@ namespace ManagementApplication.Controllers
 
             if (!ModelState.IsValid) return View(animal);
 
-            _context.Add(result);
+            await _context.Add(result);
             return RedirectToAction("Index");
         }
 
@@ -90,7 +117,16 @@ namespace ManagementApplication.Controllers
         [Authorize]
         public IActionResult Details(int id)
         {
-            return View(_context.Get(id));
+            var result = _context.Get(id);
+
+            if(result.ImageURL != null && result.ImageURL.Length > 0)
+            {
+                string imageBase64Data = Convert.ToBase64String(result.ImageURL);
+                string imgDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
+                ViewBag.ImageData = imgDataURL;
+            }
+
+            return View(result);
         }
     }
 }
