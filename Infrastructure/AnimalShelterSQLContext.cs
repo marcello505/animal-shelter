@@ -16,7 +16,7 @@ namespace Infrastructure
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //Replace this with the correct string, or find a more louse coupled solution.
-            optionsBuilder.UseSqlServer("Server=localhost;Database=AnimalShelterData;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=tcp:animalshelterdatamhaddeman.database.windows.net,1433;Initial Catalog=AnimalShelterData;Persist Security Info=False;User ID=marcello505;Password=XRFM3RUwYpnwyT7;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
