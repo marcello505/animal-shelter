@@ -43,13 +43,22 @@
                 @Html.DisplayFor(modelItem => item.Telephone)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Animal1)
+                @if(item.Animal1 != null)
+                {
+                    @await Component.InvokeAsync("AnimalNameById", new { animalId = item.Animal1.Value})
+                }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Animal2)
+                @if(item.Animal2 != null)
+                {
+                    @await Component.InvokeAsync("AnimalNameById", new { animalId = item.Animal2.Value})
+                }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Animal3)
+                @if(item.Animal3 != null)
+                {
+                    @await Component.InvokeAsync("AnimalNameById", new { animalId = item.Animal3.Value})
+                }
             </td>
             <td>
                 @Html.ActionLink("Delete", "Delete", new {id=item.Id })
