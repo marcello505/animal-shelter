@@ -1,12 +1,12 @@
-﻿using Core.DomainServices;
-using ManagementApplication.Models;
+﻿using AnimalShelterApplication.Models;
+using Core.DomainServices;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ManagementApplication.ViewComponents
+namespace AnimalShelterApplication.ViewComponents
 {
     public class AnimalSelectList :ViewComponent
     {

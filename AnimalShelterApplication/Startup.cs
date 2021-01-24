@@ -41,7 +41,7 @@ namespace AnimalShelterApplication
 
             //Setup API connection.
             var httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("https://animalshelterapi-2152991.azurewebsites.net");
+            httpClient.BaseAddress = new Uri("https://localhost:44324");
             httpClient.DefaultRequestHeaders.Accept.Clear();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             services.AddSingleton<HttpClient>(http => httpClient);

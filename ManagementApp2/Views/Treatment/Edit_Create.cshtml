@@ -42,7 +42,15 @@
                 <br />
                 <select asp-for="AnimalId">
                 <option value="">Select an animal</option>
-                @await Component.InvokeAsync("AnimalSelectList", new { id = Model.AnimalId})</select>
+                    @if (Model != null && Model.AnimalId != null)
+                    {
+                        @await Component.InvokeAsync("AnimalSelectList", new { id = Model.AnimalId})
+                    }
+                    else
+                    {
+                        @await Component.InvokeAsync("AnimalSelectList", new { id = -1})
+                    }
+                </select>
                 <br />
                 <span asp-validation-for="AnimalId" class="text-danger"></span>
             </div>
