@@ -35,6 +35,7 @@ namespace WebService
         {
             services.AddGraphQL(sp => SchemaBuilder.New()
                 .AddQueryType<QueriesGraphQL>()
+                //.AddMutationType<MutationsGraphQL>()
                 .Create());
 
 

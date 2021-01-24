@@ -16,7 +16,7 @@ namespace Infrastructure
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //Replace this with the correct string, or find a more louse coupled solution.
-            optionsBuilder.UseSqlServer("Server=tcp:mhaddeman.database.windows.net,1433;Initial Catalog=AnimalShelterData;Persist Security Info=False;User ID=marcello505;Password=/8OjJCKCB\\9U|z[S~T|NPXH\")69^ug;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            optionsBuilder.UseSqlServer("Server=localhost;Database=AnimalShelterData;Trusted_Connection=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,7 +26,7 @@ namespace Infrastructure
                     b.HasOne("Core.Models.Cage", null)
                         .WithMany("Animals")
                         .HasForeignKey("CageId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Core.Models.Comment", b =>
@@ -42,7 +42,7 @@ namespace Infrastructure
                     b.HasOne("Core.Models.Animal", null)
                         .WithMany("Treatments")
                         .HasForeignKey("AnimalId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Animal>().HasData(

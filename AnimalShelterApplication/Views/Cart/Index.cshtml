@@ -23,6 +23,8 @@
                 <span asp-validation-for="Telephone" class="text-danger"></span>
             </div>
             <input asp-for="AnimalId1" type="hidden" />
+            <input asp-for="AnimalId2" type="hidden" />
+            <input asp-for="AnimalId3" type="hidden" />
             <partial name="List" model="Model.AnimalsView" />
             <div class="form-group">
                 <input type="submit" value="Submit" class="btn-primary btn" />

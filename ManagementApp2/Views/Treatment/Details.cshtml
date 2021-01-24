@@ -62,7 +62,7 @@
             @Html.DisplayNameFor(model => model.Animal)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Animal)
+            @await Component.InvokeAsync("AnimalNameById", new {animalId = Model.AnimalId})
         </dd>
     </dl>
 </div>

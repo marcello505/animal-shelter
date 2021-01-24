@@ -39,8 +39,12 @@ namespace ManagementApplication.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult Create()
+        public IActionResult Create(int? animalId)
         {
+            if (animalId.HasValue)
+            {
+                return View(new Treatment() { AnimalId = animalId});
+            }
             return View();
         }
 

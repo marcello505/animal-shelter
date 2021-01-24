@@ -24,17 +24,53 @@
             </div>
             <div class="form-group">
                 <label asp-for="Animal1" class="control-label"></label>
-                <input asp-for="Animal1" class="form-control" />
+                <br />
+                <select asp-for="Animal1">
+                <option value="">Select an animal</option>
+                    @if (Model != null && Model.Animal1 != null)
+                    {
+                        @await Component.InvokeAsync("AnimalSelectList", new { id = Model.Animal1})
+                    }
+                    else
+                    {
+                        @await Component.InvokeAsync("AnimalSelectList", new { id = -1})
+                    }
+                </select>
+                <br />
                 <span asp-validation-for="Animal1" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Animal2" class="control-label"></label>
-                <input asp-for="Animal2" class="form-control" />
+                <br />
+                <select asp-for="Animal2">
+                <option value="">Select an animal</option>
+                    @if (Model != null && Model.Animal2 != null)
+                    {
+                        @await Component.InvokeAsync("AnimalSelectList", new { id = Model.Animal2})
+                    }
+                    else
+                    {
+                        @await Component.InvokeAsync("AnimalSelectList", new { id = -1})
+                    }
+                </select>
+                <br />
                 <span asp-validation-for="Animal2" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Animal3" class="control-label"></label>
-                <input asp-for="Animal3" class="form-control" />
+                <br />
+                <select asp-for="Animal3">
+                <option value="">Select an animal</option>
+                    @if (Model != null && Model.Animal3 != null)
+                    {
+                        @await Component.InvokeAsync("AnimalSelectList", new { id = Model.Animal3})
+                    }
+                    else
+                    {
+                        @await Component.InvokeAsync("AnimalSelectList", new { id = -1})
+                    }
+                </select>
+                <br />
                 <span asp-validation-for="Animal3" class="text-danger"></span>
             </div>
             <div class="form-group">

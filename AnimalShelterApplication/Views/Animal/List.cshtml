@@ -64,7 +64,8 @@
                 @Html.DisplayFor(modelItem => item.Adoptable)
             </td>
             <td>
-                @Html.ActionLink("Select", "Select", new { id=item.Id })
+                @Html.ActionLink("Details", "details", new { id = item.Id}) |
+                @await Component.InvokeAsync("AddAnimalToCart", new {id = item.Id})
             </td>
         </tr>
 }

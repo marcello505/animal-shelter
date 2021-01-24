@@ -44,7 +44,6 @@ namespace AnimalShelterApplication.Controllers
         [Authorize]
         public ActionResult Create(AdoptionRequestViewModel adoptionRequestViewModel)
         {
-            var animals = _animalRepository.GetAll();
             var result = new AdoptionRequest()
             {
                 Email = adoptionRequestViewModel.Email,

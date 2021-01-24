@@ -4,9 +4,9 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Create Comment</h1>
 
-<h4>Comment</h4>
+<h4>@await Component.InvokeAsync("AnimalNameById", new {animalId = Model.AnimalId})</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,11 +19,7 @@
                 <span asp-validation-for="CommentText" class="text-danger"></span>
             </div>
             <input asp-for="CommentMadeBy" type="hidden" />
-            <div class="form-group">
-                <label asp-for="AnimalId" class="control-label"></label>
-                <input asp-for="AnimalId" class="form-control" readonly />
-                <span asp-validation-for="AnimalId" class="text-danger"></span>
-            </div>
+            <input asp-for="AnimalId" type="hidden" />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -32,7 +28,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Animal" asp-action="Details" asp-route-id="@Model.AnimalId">Back to Animal</a>
 </div>
 
 @section Scripts {

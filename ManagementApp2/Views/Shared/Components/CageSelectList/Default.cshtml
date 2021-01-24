@@ -1,0 +1,17 @@
+﻿@model ManagementApplication.Models.CageSelectViewModel
+
+@foreach(var item in Model.cages)
+{
+    @if(item.Animals.Count < item.MaximumAnimals || item.Id == Model.selectedId)
+    {
+        @if(item.Id == Model.selectedId)
+        {
+            <option value="@item.Id" selected>Cage @item.Id - @(item.MaximumAnimals - item.Animals.Count) spots left</option>
+        }
+        else
+        {
+            <option value="@item.Id">Cage @item.Id - @(item.MaximumAnimals - item.Animals.Count) spots left</option>
+        }
+
+    }
+}

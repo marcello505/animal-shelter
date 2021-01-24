@@ -1,0 +1,13 @@
+﻿@model ManagementApplication.Models.AnimalSelectViewModel
+
+@foreach (var item in Model.animals)
+{
+    @if(item.Id == Model.selectedId)
+    {
+        <option value="@item.Id" selected>@item.Name</option>
+    }
+    else { 
+        <option value="@item.Id">@item.Name</option>
+
+    }
+}
